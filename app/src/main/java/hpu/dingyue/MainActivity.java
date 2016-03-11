@@ -13,14 +13,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 import rx.Observer;
@@ -48,9 +55,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         Button btn = (Button) findViewById(R.id.btn);
         Button btn2 = (Button) findViewById(R.id.btn2);
         Button btn3 = (Button) findViewById(R.id.btn3);
+        Button btn4 = (Button) findViewById(R.id.btn4);
         btn.setOnClickListener(this);
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
+        btn4.setOnClickListener(this);
     }
 
     @Override
@@ -200,6 +209,49 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 }
                 Log.e("出来了：", "------------------");
                 break;
+            case R.id.btn4:
+                Map map = new HashMap();
+                map.put("pwd", "123456");
+                map.put("userName", "dh");
+
+                JSONArray array = new JSONArray();
+                array.add("hehehhe");
+                Map map1 = new HashMap();
+                map1.put("id", "hehehhe");
+
+                JSONArray array2 = new JSONArray();
+                array2.add("hahahahah");
+                Map map2 = new HashMap();
+                map2.put("name", "hahahahah");
+
+                List list = new ArrayList();
+                list.add(map1);
+                list.add(map2);
+
+
+                map.put("test", list);
+                String s = JSON.toJSONString(map);
+                Log.i("fastJson", s);
+
+                Date date = new Date(System.currentTimeMillis());
+                Date date1 = new Date(System.currentTimeMillis() + 8 * 60 * 60 * 1000);
+                boolean sameDay = isSameDay(date, date1);
+                if (sameDay) {
+                    Log.i("ce", "是在同一天啊");
+                }
+
+                break;
+        }
+    }
+
+    public boolean isSameDay(Date day1, Date day2) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String ds1 = sdf.format(day1);
+        String ds2 = sdf.format(day2);
+        if (ds1.equals(ds2)) {
+            return true;
+        } else {
+            return false;
         }
     }
 
