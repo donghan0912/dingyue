@@ -15,12 +15,12 @@ public class SharePreUtil {
 
     private SharePreUtil(Context context) {
         mSharedPreferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        editor = mSharedPreferences.edit();
     }
 
     public static SharePreUtil getIntance(Context context) {
         if (mSharePreUtil == null) {
             mSharePreUtil = new SharePreUtil(context);
-            editor = mSharedPreferences.edit();
         }
         return mSharePreUtil;
     }
