@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import hpu.dingyue.commonUtils.SharePreUtil;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -240,6 +241,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     Log.i("ce", "是在同一天啊");
                 }
 
+                SharePreUtil.getIntance(this).setKey("123456");
+                Toast.makeText(this, SharePreUtil.getIntance(this).getKey(), Toast.LENGTH_SHORT).show();
                 break;
         }
     }
