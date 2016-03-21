@@ -11,15 +11,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -44,6 +49,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
+    private final String API_KEY = "3bc4d8968b4bfccf2a1f16e87e1ab0bb";
+    private final String POST_URL = "http://www.tuling123.com/openapi/api";
+    private EditText etText;
+    private EditText etText2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +71,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
         btn4.setOnClickListener(this);
+
+        etText = (EditText) findViewById(R.id.et_text);
+        etText2 = (EditText) findViewById(R.id.et_text2);
+        Button btn5 = (Button) findViewById(R.id.btn5);
+        btn5.setOnClickListener(this);
     }
 
     @Override
@@ -243,6 +258,37 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                 SharePreUtil.getIntance(this).setKey("123456");
                 Toast.makeText(this, SharePreUtil.getIntance(this).getKey(), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn5:
+                RequestParams params = new RequestParams(POST_URL);
+                params.addBodyParameter("key", API_KEY);
+                String info = etText.getText().toString().trim();
+                params.addBodyParameter("info", info);
+                params.addQueryStringParameter("wd", "xUtils");
+                x.http().post(params, new Callback.CommonCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Log.e("success", result);
+                        JSONObject object = JSON.parseObject(result);
+                        String text = (String) object.get("text");
+                        etText2.setText(text);
+                    }
+
+                    @Override
+                    public void onError(Throwable ex, boolean isOnCallback) {
+                        Log.i("error", ex.toString());
+                    }
+
+                    @Override
+                    public void onCancelled(CancelledException cex) {
+
+                    }
+
+                    @Override
+                    public void onFinished() {
+
+                    }
+                });
                 break;
         }
     }
