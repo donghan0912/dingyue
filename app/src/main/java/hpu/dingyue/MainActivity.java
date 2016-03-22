@@ -1,5 +1,6 @@
 package hpu.dingyue;
 
+import android.content.Intent;
 import android.os.Looper;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -49,8 +50,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private final String API_KEY = "3bc4d8968b4bfccf2a1f16e87e1ab0bb";
-    private final String POST_URL = "http://www.tuling123.com/openapi/api";
+
     private EditText etText;
     private EditText etText2;
 
@@ -260,35 +260,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 Toast.makeText(this, SharePreUtil.getIntance(this).getKey(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn5:
-                RequestParams params = new RequestParams(POST_URL);
-                params.addBodyParameter("key", API_KEY);
-                String info = etText.getText().toString().trim();
-                params.addBodyParameter("info", info);
-                params.addQueryStringParameter("wd", "xUtils");
-                x.http().post(params, new Callback.CommonCallback<String>() {
-                    @Override
-                    public void onSuccess(String result) {
-                        Log.e("success", result);
-                        JSONObject object = JSON.parseObject(result);
-                        String text = (String) object.get("text");
-                        etText2.setText(text);
-                    }
-
-                    @Override
-                    public void onError(Throwable ex, boolean isOnCallback) {
-                        Log.i("error", ex.toString());
-                    }
-
-                    @Override
-                    public void onCancelled(CancelledException cex) {
-
-                    }
-
-                    @Override
-                    public void onFinished() {
-
-                    }
-                });
+                startActivity(new Intent(this, ChatActivity.class));
                 break;
         }
     }
