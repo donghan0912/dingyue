@@ -226,6 +226,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 Log.e("出来了：", "------------------");
                 break;
             case R.id.btn4:
+
+                startActivity(new Intent(this, TestActivity.class));
+
                 Map map = new HashMap();
                 map.put("pwd", "123456");
                 map.put("userName", "dh");

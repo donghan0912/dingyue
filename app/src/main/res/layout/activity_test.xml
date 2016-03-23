@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+<TextView
+    android:id="@+id/tv"
+    android:text="测试"
+    android:textSize="40sp"
+    android:padding="10dp"
+    android:layout_width="180dp"
+    android:layout_height="80dp"/>
+
+    <Button
+        android:text="点我"
+        android:onClick="onClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_right"
+        android:text="我只是说了地方；绝对是放假了是的放假了；司法解释；劳动纠纷的事了；富家大室；雷锋精神动力"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
