@@ -25,12 +25,20 @@ public class ChatUtil {
         RequestParams params = new RequestParams("http://www.tuling123.com/openapi/api");
         params.addBodyParameter("key", "3bc4d8968b4bfccf2a1f16e87e1ab0bb");
         params.addBodyParameter("info", message.msg);
-        params.addQueryStringParameter("wd", "xUtils");
-        x.http().post(params, new RequestCallBack() {
+//        params.addQueryStringParameter("wd", "xUtils");
+//        x.http().post(params, new RequestCallBack() {
+//            @Override
+//            public void success(String result) {
+//                callBack.onGet(result);
+//            }
+//        });
+
+        RequestCallBack cb = new RequestCallBack() {
             @Override
             public void success(String result) {
                 callBack.onGet(result);
             }
-        });
+        };
+        DYHttp.post(params, cb);
     }
 }
