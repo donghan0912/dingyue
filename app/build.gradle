@@ -27,4 +27,6 @@ dependencies {
     compile files('libs/jsoup-1.8.1.jar')
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.alibaba:fastjson:1.1.46.android'
+    compile 'org.xutils:xutils:3.3.22'
 }

@@ -1,5 +1,6 @@
 package hpu.dingyue;
 
+import android.content.Intent;
 import android.os.Looper;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,19 +12,36 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.xutils.common.Callback;
+import org.xutils.http.RequestParams;
+import org.xutils.x;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import hpu.dingyue.commonUtils.SharePreUtil;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
     private FragmentManager supportFragmentManager;
@@ -32,81 +50,42 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private Observer observer = new Observer() {// 创建观察者
-        @Override
-        public void onCompleted() {
 
-        }
-
-        @Override
-        public void onError(Throwable e) {
-
-        }
-
-        @Override
-        public void onNext(Object o) {
-
-        }
-    };
-
-    private Subscriber subscriber = new Subscriber() {// 创建观察者，与Observer类似
-        @Override
-        public void onStart() {// 它总是在 subscribe 所发生的线程被调用，而不能指定线程。
-            super.onStart();
-        }
-
-        @Override
-        public void onCompleted() {
-
-        }
-
-        @Override
-        public void onError(Throwable e) {
-
-        }
-
-        @Override
-        public void onNext(Object o) {
-
-        }
-    };
-
-    private Observable<String> observable = Observable.create(new Observable.OnSubscribe<String>() {
-        @Override
-        public void call(Subscriber<? super String> subscriber) {
-
-        }
-    });
+    private EditText etText;
+    private EditText etText2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         supportFragmentManager = getSupportFragmentManager();
         myAdapter = new MyAdapter(supportFragmentManager);
 
         Button btn = (Button) findViewById(R.id.btn);
+        Button btn2 = (Button) findViewById(R.id.btn2);
+        Button btn3 = (Button) findViewById(R.id.btn3);
+        Button btn4 = (Button) findViewById(R.id.btn4);
         btn.setOnClickListener(this);
+        btn2.setOnClickListener(this);
+        btn3.setOnClickListener(this);
+        btn4.setOnClickListener(this);
+
+        etText = (EditText) findViewById(R.id.et_text);
+        etText2 = (EditText) findViewById(R.id.et_text2);
+        Button btn5 = (Button) findViewById(R.id.btn5);
+        btn5.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn:
-                new Thread(new Runnable() {
+                /*new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        if (isInMainThread()) {
-                            Log.i("isInMainThread:", "我在主线程");
-                        } else {
-                            Log.i("isInMainThread:", "我在子线程");
-                        }
-                        long id = Thread.currentThread().getId();
-                        String name = Thread.currentThread().getName();
-                        Log.i("id = " + id, "; name = " + name);
+
                         try {
                             Document document = Jsoup.connect("http://www.androidweekly.cn/").get();
                             Elements links = document.select("h2 a");// 获取h2元素下的所有a元素
@@ -148,9 +127,155 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             e.printStackTrace();
                         }
                     }
-                }).start();
+                }).start();*/
 
+
+                Observable.create(new Observable.OnSubscribe<String>() {
+                    @Override
+                    public void call(Subscriber<? super String> subscriber) {
+                        try {
+                            Document document = Jsoup.connect("http://www.androidweekly.cn/").get();
+                            Elements links = document.select("h2 a");// 获取h2元素下的所有a元素
+                            List<String> titleList = new ArrayList<String>();
+                            List<String> linkList = new ArrayList<String>();
+                            for(Element link : links) {
+                                linkList.add(link.attr("abs:href"));
+                                titleList.add(link.text());
+//                                System.out.println(link.attr("abs:href") + link.text());
+                            }
+
+                            Elements contents = document.select("section p");
+                            List<String> contentList = new ArrayList<String>();
+                            for(Element content : contents) {
+                                contentList.add(content.text());
+//                                System.out.println(content.text());
+                            }
+
+                            Elements times = document.getElementsByTag("time");
+                            List<String> timeList = new ArrayList<String>();
+                            for (Element time : times) {
+                                timeList.add(time.text());
+//                                System.out.println(time.text());
+                            }
+                            mList.add(titleList);
+                            mList.add(linkList);
+                            mList.add(contentList);
+                            mList.add(timeList);
+
+                            subscriber.onCompleted();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer() {
+                            @Override
+                            public void onCompleted() {
+                                viewPager.setAdapter(myAdapter);
+                                tabLayout.setupWithViewPager(viewPager);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                e.printStackTrace();
+                            }
+
+                            @Override
+                            public void onNext(Object o) {
+
+                            }
+                        });
                 break;
+            case R.id.btn2:
+                Observable.create(new Observable.OnSubscribe<String>() {
+                    @Override
+                    public void call(Subscriber<? super String> subscriber) {
+                        subscriber.onNext("hellow");
+                        subscriber.onNext("rx");
+                        subscriber.onNext("android");
+                        subscriber.onCompleted();
+                    }
+                })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<String>() {
+                            @Override
+                            public void onCompleted() {
+                                Log.d("complete", "结束");
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onNext(String s) {
+                                Log.d("tag", s);
+                            }
+                        });
+                break;
+            case R.id.btn3:
+                try {
+                    int i = 2/0;
+                    Log.e("接着：", "------------------");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Log.e("出来了：", "------------------");
+                break;
+            case R.id.btn4:
+
+                startActivity(new Intent(this, TestActivity.class));
+
+                Map map = new HashMap();
+                map.put("pwd", "123456");
+                map.put("userName", "dh");
+
+                JSONArray array = new JSONArray();
+                array.add("hehehhe");
+                Map map1 = new HashMap();
+                map1.put("id", "hehehhe");
+
+                JSONArray array2 = new JSONArray();
+                array2.add("hahahahah");
+                Map map2 = new HashMap();
+                map2.put("name", "hahahahah");
+
+                List list = new ArrayList();
+                list.add(map1);
+                list.add(map2);
+
+
+                map.put("test", list);
+                String s = JSON.toJSONString(map);
+                Log.i("fastJson", s);
+
+                Date date = new Date(System.currentTimeMillis());
+                Date date1 = new Date(System.currentTimeMillis() + 8 * 60 * 60 * 1000);
+                boolean sameDay = isSameDay(date, date1);
+                if (sameDay) {
+                    Log.i("ce", "是在同一天啊");
+                }
+
+                SharePreUtil.getIntance(this).setKey("123456");
+                Toast.makeText(this, SharePreUtil.getIntance(this).getKey(), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn5:
+                startActivity(new Intent(this, ChatActivity.class));
+                break;
+        }
+    }
+
+    public boolean isSameDay(Date day1, Date day2) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String ds1 = sdf.format(day1);
+        String ds2 = sdf.format(day2);
+        if (ds1.equals(ds2)) {
+            return true;
+        } else {
+            return false;
         }
     }
 
