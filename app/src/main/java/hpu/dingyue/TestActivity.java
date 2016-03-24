@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -37,6 +36,7 @@ public class TestActivity extends Activity {
         showMenu(tv2, -800);
     }
 
+    // TODO 平移动画
     private void showMenu(View view, float dp) {
         TranslateAnimation tAnimation = new TranslateAnimation(0, dp, 0, 0);
         AccelerateInterpolator inter = new AccelerateInterpolator();
