@@ -41,9 +41,10 @@ public class TestActivity extends Activity {
         TranslateAnimation tAnimation = new TranslateAnimation(0, dp, 0, 0);
         AccelerateInterpolator inter = new AccelerateInterpolator();
         tAnimation.setDuration(1000);//设置动画持续时间
-        tAnimation.setInterpolator(inter);
+//        tAnimation.setInterpolator(inter);
+        tAnimation.setFillAfter(true);
         view.startAnimation(tAnimation);
-        view.setVisibility(View.VISIBLE);
+//        view.setVisibility(View.VISIBLE);
     }
 
 }
