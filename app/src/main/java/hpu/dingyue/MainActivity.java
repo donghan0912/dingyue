@@ -1,5 +1,7 @@
 package hpu.dingyue;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Looper;
 import android.support.design.widget.TabLayout;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -29,10 +32,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import hpu.dingyue.commonUtils.AnimationUtils;
 import hpu.dingyue.commonUtils.SharePreUtil;
 import rx.Observable;
 import rx.Observer;
@@ -50,6 +53,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private EditText etText;
     private EditText etText2;
+    private Button btn5;
+    private TextView scale1;
+    private TextView scale2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +77,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         etText = (EditText) findViewById(R.id.et_text);
         etText2 = (EditText) findViewById(R.id.et_text2);
-        Button btn5 = (Button) findViewById(R.id.btn5);
+        btn5 = (Button) findViewById(R.id.btn5);
         btn5.setOnClickListener(this);
+
+        scale1 = (TextView) findViewById(R.id.tv_scale1);
+        scale2 = (TextView) findViewById(R.id.tv_scale2);
+
     }
 
     @Override
@@ -214,6 +224,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         });
                 break;
             case R.id.btn3:
+                AnimationUtils.scale(scale1);
+                AnimationUtils.translation(scale2);
                 try {
                     int i = 2/0;
                     Log.e("接着：", "------------------");
