@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -325,4 +326,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                Toast.makeText(this, "音量--------", Toast.LENGTH_SHORT).show();
+                break;
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                Toast.makeText(this, "音量++++++++", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
