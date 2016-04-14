@@ -1,6 +1,7 @@
 package hpu.dingyue;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ public class TestActivity extends Activity {
 //        tv2.setVisibility(View.GONE);
         showMenu(tv, -800);
         showMenu(tv2, -800);
+
+        startActivity(new Intent(this, Test2Activity.class));
     }
 
     // TODO 平移动画
