@@ -97,5 +97,11 @@
                 android:text="我是缩放2"
                 android:textSize="20sp"/>
         </LinearLayout>
+
+        <Button
+            android:text="测试6"
+            android:id="@+id/btn6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </RelativeLayout>

@@ -57,6 +57,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private Button btn5;
     private TextView scale1;
     private TextView scale2;
+    private Button btn6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         etText2 = (EditText) findViewById(R.id.et_text2);
         btn5 = (Button) findViewById(R.id.btn5);
         btn5.setOnClickListener(this);
+        btn6 = (Button) findViewById(R.id.btn6);
+        btn6.setOnClickListener(this);
 
         scale1 = (TextView) findViewById(R.id.tv_scale1);
         scale2 = (TextView) findViewById(R.id.tv_scale2);
@@ -274,6 +277,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             case R.id.btn5:
                 startActivity(new Intent(this, ChatActivity.class));
+                break;
+            case R.id.btn6:
+                startActivity(new Intent(this, ExpandableListViewActivity.class));
                 break;
         }
     }
