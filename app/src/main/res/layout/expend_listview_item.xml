@@ -6,6 +6,7 @@
 
     <TextView
         android:id="@+id/tv"
+        android:layout_marginLeft="8dp"
         android:text="但是法律空间数据库地方了极乐世界亏大发了健康"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

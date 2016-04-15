@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">dingyue</string>
+    <item type="id" name="first_tag"/>
+    <item type="id" name="second_tag"/>
 </resources>

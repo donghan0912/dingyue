@@ -16,7 +16,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="马克思主义是关于无产阶级"
+            android:text="重要内容重要内容重要内容"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:layout_marginLeft="10dp"/>
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="正确和实践的观点是理解人与自然关系， 人与自然统一的关键。和谐之处，是学发展观的重要内容"
+            android:text="重要内容重要内容重要内容重要内容重要内容重要内容重要内容重要内容重要内容"
             android:textSize="18sp"
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
@@ -48,10 +48,17 @@
             android:padding="10dp"
             />
         <ListView
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_below="@id/tv_content"
             android:id="@+id/lv_child"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_control"
+            android:layout_gravity="right"
+            android:padding="6dp"
+            android:text="展开笔记"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 </RelativeLayout>
