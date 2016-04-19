@@ -3,6 +3,7 @@ package hpu.dingyue;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,10 +72,31 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
         list4.add("1246");
 
         myData = new ArrayList();
-        myData.add(0, data);
-        myData.add(1, list2);
-        myData.add(2, list3);
-        myData.add(3, list4);
+//        myData.add(0, data);
+//        myData.add(1, list2);
+//        myData.add(2, list3);
+//        myData.add(3, list4);
+
+        for (int i = 0; i <= 8; i++) {
+            List<String> list = new ArrayList<>();
+            list.add(1 + "这是第" + i + "条数据");
+            list.add(2 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            list.add(3 + "这是第" + i + "条数据");
+            myData.add(list);
+        }
 
 //        final ChildrenAdapter childrenAdapter = new ChildrenAdapter();
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -222,8 +244,8 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
                 viewHolder.tv = (TextView) convertView.findViewById(R.id.tv_control);
 //                viewHolder.childView.setVisibility(View.GONE);
 
-                list.add(childView);
-                tvList.add(tv);
+//                list.add(childView);
+//                tvList.add(tv);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -232,21 +254,38 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
             viewHolder.tv.setTag(R.id.first_tag, position);
             viewHolder.childView.setTag(R.id.second_tag, position);
 
+            viewHolder.childView.setVisibility(View.GONE);
+
+            if (getPosition().contains(position)) {
+                viewHolder.childView.setVisibility(View.VISIBLE);
+                viewHolder.childView.setAdapter(new ChildrenAdapter(position));
+                setListViewHeightBasedOnChildren(viewHolder.childView);
+                viewHolder.tv.setText("收起笔记");
+            } else {
+                viewHolder.childView.setVisibility(View.GONE);
+                viewHolder.tv.setText("展开笔记");
+            }
+
             final ViewHolder finalViewHolder = viewHolder;
-            final ViewHolder finalViewHolder1 = viewHolder;
             viewHolder.tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int r =Integer.parseInt(v.getTag(R.id.first_tag).toString());
-                    int tag = (int) finalViewHolder1.childView.getTag(R.id.second_tag);
+                    int tag = (int) finalViewHolder.childView.getTag(R.id.second_tag);
 
-//                    Toast.makeText(getApplicationContext(), r + "", Toast.LENGTH_SHORT).show();
-                    if (r == tag) {
+
+                    if ("展开笔记".equals(finalViewHolder.tv.getText().toString())) {
                         finalViewHolder.childView.setVisibility(View.VISIBLE);
                         finalViewHolder.childView.setAdapter(new ChildrenAdapter(position));
                         setListViewHeightBasedOnChildren(finalViewHolder.childView);
-//                        setPosition(position);
+                        finalViewHolder.tv.setText("收起笔记");
+                        setPosition(position);
+                    } else {
+                        finalViewHolder.childView.setVisibility(View.GONE);
+                        finalViewHolder.tv.setText("展开笔记");
+
                     }
+
                 }
             });
 
@@ -258,12 +297,14 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
             ListView childView;
         }
 
+        List<Integer> mList = new ArrayList<>();
         public void setPosition(int position) {
             this.position = position;
+            mList.add(position);
         }
 
-        public int getPosition() {
-            return position;
+        public List<Integer> getPosition() {
+            return mList;
         }
 
 
@@ -274,11 +315,15 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
     class ChildrenAdapter extends BaseAdapter {
 
         private int pos;
-        List data;
+        List<String> data;
 
         public ChildrenAdapter(int positon) {
             this.pos = positon;
             data = (List) myData.get(pos);
+        }
+
+        public int getData() {
+            return pos;
         }
 
         @Override
@@ -288,7 +333,7 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
 
         @Override
         public String getItem(int position) {
-            return (String) data.get(position);
+            return  data.get(position);
         }
 
         @Override
@@ -307,8 +352,7 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-//            TextView tv = (TextView) convertView.findViewById(R.id.tv);
-            viewHolder.tv.setText((String) data.get(position));
+            viewHolder.tv.setText( data.get(position));
             return convertView;
         }
 
