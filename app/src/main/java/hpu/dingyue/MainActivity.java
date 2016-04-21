@@ -87,7 +87,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         scale1 = (TextView) findViewById(R.id.tv_scale1);
         scale2 = (TextView) findViewById(R.id.tv_scale2);
 
-        findViewById(R.id.tv_test).setOnClickListener(this);
+        findViewById(R.id.btn7).setOnClickListener(this);
 
     }
 
@@ -283,8 +283,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.btn6:
                 startActivity(new Intent(this, ExpandableListViewActivity.class));
                 break;
-            case R.id.tv_test:
-                Toast.makeText(this, "你点我了", Toast.LENGTH_SHORT).show();
+            case R.id.btn7:
+                startActivity(new Intent(this, RadioActivity.class));
                 break;
         }
     }
