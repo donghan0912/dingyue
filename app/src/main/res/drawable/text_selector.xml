@@ -5,14 +5,11 @@
     <!-- 没有焦点时字体颜色 -->
     <item
         android:state_selected="false"
-        android:color="#FFFFFF"/>
+        android:color="#000"/>
     <!--选中时的字体颜色  -->
     <item
         android:state_selected="true"
         android:color="#3197FF"/>
     <!-- 非触摸模式下获得焦点并单击时的字体颜色 -->
-    <item
-        android:state_focused="true"
-        android:state_pressed="true"
-        android:color="#3197FF"/>
+
 </selector>

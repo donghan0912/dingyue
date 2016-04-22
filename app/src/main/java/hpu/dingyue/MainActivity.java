@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -187,6 +188,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             public void onCompleted() {
                                 viewPager.setAdapter(myAdapter);
                                 tabLayout.setupWithViewPager(viewPager);
+                                tabLayout.getTabAt(0).setIcon(R.drawable.icon_new_talk_file1);
+                                tabLayout.getTabAt(1).setCustomView(getTabView());
                             }
 
                             @Override
@@ -284,7 +287,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 startActivity(new Intent(this, ExpandableListViewActivity.class));
                 break;
             case R.id.btn7:
-                startActivity(new Intent(this, RadioActivity.class));
+//                startActivity(new Intent(this, RadioActivity.class));
+                startActivity(new Intent(this, TabLayoutActivity.class));
                 break;
         }
     }
@@ -348,5 +352,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    private View getTabView() {
+        View view = LayoutInflater.from(this).inflate(R.layout.item_tab, null);
+        return view;
     }
 }
