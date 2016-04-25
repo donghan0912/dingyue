@@ -1,7 +1,5 @@
 package hpu.dingyue;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Looper;
 import android.support.design.widget.TabLayout;
@@ -39,6 +37,7 @@ import java.util.Map;
 
 import hpu.dingyue.commonUtils.AnimationUtils;
 import hpu.dingyue.commonUtils.SharePreUtil;
+import hpu.dingyue.fragment.TabLayoutActivity;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;

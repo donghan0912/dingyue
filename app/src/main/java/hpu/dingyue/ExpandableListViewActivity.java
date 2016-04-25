@@ -72,10 +72,6 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
         list4.add("1246");
 
         myData = new ArrayList();
-//        myData.add(0, data);
-//        myData.add(1, list2);
-//        myData.add(2, list3);
-//        myData.add(3, list4);
 
         for (int i = 0; i <= 8; i++) {
             List<String> list = new ArrayList<>();
@@ -98,21 +94,6 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
             myData.add(list);
         }
 
-//        final ChildrenAdapter childrenAdapter = new ChildrenAdapter();
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                ListView childView = list.get(position);
-//                if (childView.getVisibility() == View.GONE) {
-//                    childView.setVisibility(View.VISIBLE);
-//                    childView.setAdapter(childrenAdapter);
-//                    setListViewHeightBasedOnChildren(childView);
-//                } else {
-//                    childView.setVisibility(View.GONE);
-//                }
-                groupAdapter.setPosition(position);
-            }
-        });
     }
 
     /**
@@ -141,12 +122,7 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_control:
-//                int position = groupAdapter.getPosition();
-//                ChildrenAdapter childrenAdapter = new ChildrenAdapter();
-//                ListView listView = list.get(position);
-//                listView.setAdapter(childrenAdapter);
-                break;
+
         }
     }
 
@@ -206,15 +182,8 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
         }
     }
 
-    private List<ListView> list = new ArrayList();
-    private List<TextView> tvList = new ArrayList<>();
-    private ListView childView;
+
     class GroupAdapter extends BaseAdapter {
-        private Map<Integer, List> map = new HashMap<>();
-        private int position;
-        private View view;
-        private List list2 = new ArrayList();
-        private MyOnClickListener myOnClickListener;
 
         @Override
         public int getCount() {
@@ -233,19 +202,12 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder = new ViewHolder();
-            MyOnClickListener myOnClickListener = null;
-            TextView tv = null;
+            ViewHolder viewHolder;
             if (convertView == null) {
                 viewHolder = new ViewHolder();
-                myOnClickListener =  new MyOnClickListener(position);
                 convertView = View.inflate(getApplicationContext(), R.layout.expendlist_group, null);
                 viewHolder.childView = (ListView) convertView.findViewById(R.id.lv_child);
                 viewHolder.tv = (TextView) convertView.findViewById(R.id.tv_control);
-//                viewHolder.childView.setVisibility(View.GONE);
-
-//                list.add(childView);
-//                tvList.add(tv);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
@@ -270,10 +232,6 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
             viewHolder.tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int r =Integer.parseInt(v.getTag(R.id.first_tag).toString());
-                    int tag = (int) finalViewHolder.childView.getTag(R.id.second_tag);
-
-
                     if ("展开笔记".equals(finalViewHolder.tv.getText().toString())) {
                         finalViewHolder.childView.setVisibility(View.VISIBLE);
                         finalViewHolder.childView.setAdapter(new ChildrenAdapter(position));
@@ -299,16 +257,12 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
 
         List<Integer> mList = new ArrayList<>();
         public void setPosition(int position) {
-            this.position = position;
             mList.add(position);
         }
 
         public List<Integer> getPosition() {
             return mList;
         }
-
-
-
 
     }
 
@@ -320,10 +274,6 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
         public ChildrenAdapter(int positon) {
             this.pos = positon;
             data = (List) myData.get(pos);
-        }
-
-        public int getData() {
-            return pos;
         }
 
         @Override
@@ -343,7 +293,7 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder = new ViewHolder();
+            ViewHolder viewHolder;
             if (convertView == null) {
                 viewHolder = new ViewHolder();
                 convertView = View.inflate(getApplicationContext(), R.layout.expend_listview_item, null);
@@ -358,20 +308,6 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
 
         class ViewHolder{
             TextView tv;
-        }
-    }
-
-    class MyOnClickListener implements View.OnClickListener {
-
-        private int position;
-
-        public MyOnClickListener(int position) {
-            this.position = position;
-        }
-        @Override
-        public void onClick(View v) {
-            int position =Integer.parseInt(v.getTag().toString());
-            Toast.makeText(getApplicationContext(), position + "", Toast.LENGTH_SHORT).show();
         }
     }
 
