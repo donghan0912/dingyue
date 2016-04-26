@@ -357,4 +357,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         View view = LayoutInflater.from(this).inflate(R.layout.item_tab, null);
         return view;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
