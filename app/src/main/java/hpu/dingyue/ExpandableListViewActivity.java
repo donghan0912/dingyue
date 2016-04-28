@@ -218,7 +218,7 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
 
             viewHolder.childView.setVisibility(View.GONE);
 
-            if (getPosition().contains(position)) {
+            if (getPosition().contains(String.valueOf(position))) {
                 viewHolder.childView.setVisibility(View.VISIBLE);
                 viewHolder.childView.setAdapter(new ChildrenAdapter(position));
                 setListViewHeightBasedOnChildren(viewHolder.childView);
@@ -241,7 +241,7 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
                     } else {
                         finalViewHolder.childView.setVisibility(View.GONE);
                         finalViewHolder.tv.setText("展开笔记");
-
+                        removePos(position);
                     }
 
                 }
@@ -255,12 +255,16 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
             ListView childView;
         }
 
-        List<Integer> mList = new ArrayList<>();
+        List<String> mList = new ArrayList<>();
         public void setPosition(int position) {
-            mList.add(position);
+            mList.add(String.valueOf(position));
         }
 
-        public List<Integer> getPosition() {
+        private void removePos(int position) {
+            mList.remove(String.valueOf(position));
+        }
+
+        public List<String> getPosition() {
             return mList;
         }
 

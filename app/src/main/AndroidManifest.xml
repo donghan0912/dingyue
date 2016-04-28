@@ -24,7 +24,8 @@
         <activity android:name=".ExpandableListViewActivity"/>
         <activity android:name=".Test2Activity"/>
         <activity android:name=".RadioActivity"/>
-        <activity android:name=".fragment.TabLayoutActivity"/>
+        <activity android:name=".fragment.TabLayoutActivity" android:screenOrientation="landscape"
+            android:configChanges="screenSize|orientation"/>
     </application>
 
 </manifest>

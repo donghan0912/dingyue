@@ -1,1 +1,3 @@
 按下锁屏按钮后，activity就被销毁？（还是由于app横屏，导致生命周期重新开始）
+
+RecyclerView、EventBus使用
