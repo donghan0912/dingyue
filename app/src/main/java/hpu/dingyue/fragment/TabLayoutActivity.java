@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 
 import hpu.dingyue.R;
 
@@ -72,7 +70,6 @@ public class TabLayoutActivity extends FragmentActivity {
         });
 
         initView();
-
     }
 
     private void initView() {

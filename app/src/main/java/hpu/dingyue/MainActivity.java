@@ -1,5 +1,6 @@
 package hpu.dingyue;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
 import android.support.design.widget.TabLayout;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -37,6 +40,7 @@ import java.util.Map;
 
 import hpu.dingyue.commonUtils.AnimationUtils;
 import hpu.dingyue.commonUtils.SharePreUtil;
+import hpu.dingyue.eventbus.LoginMessage;
 import hpu.dingyue.fragment.TabLayoutActivity;
 import rx.Observable;
 import rx.Observer;
@@ -88,13 +92,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         scale2 = (TextView) findViewById(R.id.tv_scale2);
 
         findViewById(R.id.btn7).setOnClickListener(this);
-
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn:
+//                LoginMessage loginMessage = new LoginMessage();
+//                loginMessage.setUserName("sdfds");
+//                loginMessage.setPassword("123456");
+//                EventBus.getDefault().post(loginMessage);
                 /*new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -358,8 +366,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         return view;
     }
 
+    @Subscribe
+    public void s(LoginMessage msg) {
+        etText2.setText(msg.getUserName());
+        etText.setText(msg.getPassword());
+        Toast.makeText(this, msg.getPassword(), Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+//        EventBus.getDefault().unregister(this);
     }
+
+
+
+
 }

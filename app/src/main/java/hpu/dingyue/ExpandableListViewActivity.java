@@ -14,12 +14,9 @@ import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -37,7 +34,6 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expandable);
-
 //        mListView1 = (ExpandableListView) findViewById(R.id.expandable_listview);
 //        MyExpandableListViewAdapter adapter = new MyExpandableListViewAdapter();
 //        mListView1.setAdapter(adapter);
@@ -126,6 +122,11 @@ public class ExpandableListViewActivity extends Activity implements View.OnClick
         }
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     class MyExpandableListViewAdapter extends BaseExpandableListAdapter {
 

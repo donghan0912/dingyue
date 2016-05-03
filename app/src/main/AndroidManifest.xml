@@ -11,13 +11,14 @@
         android:supportsRtl="true"
         android:name=".DingYueApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".InfoActivity"/>
         <activity android:name=".ChatActivity" android:windowSoftInputMode="stateHidden|stateUnchanged"/>
         <activity android:name=".TestActivity"/>
@@ -26,6 +27,7 @@
         <activity android:name=".RadioActivity"/>
         <activity android:name=".fragment.TabLayoutActivity" android:screenOrientation="landscape"
             android:configChanges="screenSize|orientation"/>
+        <activity android:name=".EventBusActivity"/>
     </application>
 
 </manifest>
