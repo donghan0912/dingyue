@@ -63,6 +63,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TextView scale2;
     private Button btn6;
 
+    public static Intent getIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+//        intent.putExtra("username", "test100");
+//        intent.putExtra("password", "123456");
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

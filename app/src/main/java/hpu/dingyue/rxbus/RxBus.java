@@ -25,6 +25,8 @@ public class RxBus {
         return _bus;
     }
 
+    // 判断事件是否被订阅
+    // 如果返回false(还未被订阅)，即使发送了消息，也收不到
     public boolean hasObservers() {
         return _bus.hasObservers();
     }

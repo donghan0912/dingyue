@@ -34,13 +34,14 @@ public class RightFragment extends Fragment {
         EventBus.getDefault().register(this);
         View view = inflater.inflate(R.layout.fragment2, null);
         mListView = (ListView) view.findViewById(R.id.lv);
-        rxBus = ((EventBusActivity)getActivity()).getRxBusSingleton();
+        rxBus = ((RxBusActivity)getActivity()).getRxBusSingleton();
+        subject();
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+    // 这里一定要注意LeftFragment和RightFragment的生命周期
+    // 一定要先订阅，否则即使在LeftFragment发送了消息，RightFragment也无法
+    private void subject() {
         subscription = new CompositeSubscription();
         subscription.add(rxBus.toObserverable().subscribe(new Action1<Object>() {
             @Override
@@ -52,6 +53,7 @@ public class RightFragment extends Fragment {
             }
         }));
     }
+
 
     @Override
     public void onDestroy() {

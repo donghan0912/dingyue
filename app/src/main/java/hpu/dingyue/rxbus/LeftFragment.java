@@ -28,8 +28,17 @@ public class LeftFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.btn3).setOnClickListener(this);
         view.findViewById(R.id.btn4).setOnClickListener(this);
         view.findViewById(R.id.btn5).setOnClickListener(this);
-        rxBus = ((EventBusActivity)getActivity()).getRxBusSingleton();
+        rxBus = ((RxBusActivity)getActivity()).getRxBusSingleton();
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // 是为了初始化，默认显示第一个按钮的内容
+        if (rxBus.hasObservers()) {
+            rxBus.send(getData(1));
+        }
     }
 
     @Override

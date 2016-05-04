@@ -1,6 +1,8 @@
 package hpu.dingyue.rxbus;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import hpu.dingyue.R;
@@ -8,7 +10,12 @@ import hpu.dingyue.R;
 /**
  * Created by Administrator on 2016/5/3.
  */
-public class EventBusActivity extends Activity {
+public class RxBusActivity extends Activity {
+
+    public static Intent getIntent(Context context) {
+        Intent intent = new Intent(context, RxBusActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
