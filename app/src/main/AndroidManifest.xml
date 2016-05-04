@@ -27,7 +27,7 @@
         <activity android:name=".RadioActivity"/>
         <activity android:name=".fragment.TabLayoutActivity" android:screenOrientation="landscape"
             android:configChanges="screenSize|orientation"/>
-        <activity android:name=".EventBusActivity"/>
+        <activity android:name=".rxbus.EventBusActivity"/>
     </application>
 
 </manifest>

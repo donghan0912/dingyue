@@ -1,9 +1,9 @@
-package hpu.dingyue;
+package hpu.dingyue.rxbus;
 
 import android.app.Activity;
 import android.os.Bundle;
 
-import hpu.dingyue.rxbus.RxBus;
+import hpu.dingyue.R;
 
 /**
  * Created by Administrator on 2016/5/3.
@@ -19,7 +19,7 @@ public class EventBusActivity extends Activity {
     private static RxBus _rxBus = null;
 
     // This is better done with a DI Library like Dagger
-    public static RxBus getRxBusSingleton() {
+    public RxBus getRxBusSingleton() {
         if (_rxBus == null) {
             _rxBus = new RxBus();
         }
