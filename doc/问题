@@ -1,3 +1,11 @@
 按下锁屏按钮后，activity就被销毁？（还是由于app横屏，导致生命周期重新开始）
 
 RecyclerView、EventBus使用
+
+Retrofit 大致使用流程(参考：http://www.jianshu.com/p/90b1f20b123d)：
+    1. 创建一个接口A
+    2. 创建Retrofit对象
+    3. 用Retrofit对象创建一个A对象
+    4. enqueue()，异步请求
+
+RecyclerView 添加item点击事件：http://blog.csdn.net/liaoinstan/article/details/51200600#comments
