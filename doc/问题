@@ -9,3 +9,45 @@ Retrofit 大致使用流程(参考：http://www.jianshu.com/p/90b1f20b123d)：
     4. enqueue()，异步请求
 
 RecyclerView 添加item点击事件：http://blog.csdn.net/liaoinstan/article/details/51200600#comments
+
+Android view坐标获取：http://blog.csdn.net/jason0539/article/details/42743531
+
+
+RxJava + Retrofit 结合使用：
+    超学项目：ServiceGenerator，这里处理了：虽然请求成功，但是可能服务器方面有问题，没有返回正确的数据
+
+        if (code != 0) { // 错误
+                String desc = object.getString("desc");
+                if (TextUtils.isEmpty(desc)) {
+                    desc = "{}";
+                }
+                ResponseBody errorBody = ResponseBody.create(responseBody.contentType(), desc);
+                responseBuilder.code(code).body(errorBody);
+                // 注：这里将请求状态码设置为服务器返回的code值(例如-1)，如果不设置，请求成功的状态码正常为200，
+                // 在adapter-rxjava CompletableHelper 58行，如果状态码不是>=200 & < 300,就会抛出HttpException异常
+                // 这就是为什么上面设置code后，会走Subscriber的onError()方法
+            } else {
+                String info = object.getString("info");
+                if (TextUtils.isEmpty(info)) {
+                    info = "{}";
+                }
+                ResponseBody decryptedBody = ResponseBody.create(responseBody.contentType(), info);
+
+                responseBuilder.body(decryptedBody);
+            }
+
+
+  2. 在onError()方法里面处理异常：
+if (e instanceof HttpException) {
+        try {
+            String string = ((HttpException) e).response().errorBody().string();
+            int code = ((HttpException) e).response().code();
+            Log.e("TAG", string + "   " + code);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    } else if (e instanceof ConnectException) {
+        Log.e("TAG", "连接异常");
+    } else if (e instanceof SocketTimeoutException) {
+        Log.e("TAG", "连接超时");
+    }
