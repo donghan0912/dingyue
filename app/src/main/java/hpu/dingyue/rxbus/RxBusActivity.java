@@ -23,7 +23,7 @@ public class RxBusActivity extends Activity {
         setContentView(R.layout.activity_eventbus);
     }
 
-    private static RxBus _rxBus = null;
+    private RxBus _rxBus = null;
 
     // This is better done with a DI Library like Dagger
     public RxBus getRxBusSingleton() {

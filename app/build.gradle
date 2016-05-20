@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
     defaultConfig {
         applicationId "hpu.dingyue"
         minSdkVersion 14
@@ -11,10 +11,32 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        release {
+            keyAlias 'dingyue'
+            keyPassword '123456'
+            storeFile file('dingyue.jks')
+            storePassword '123456'
+        }
+
+        debug {
+            keyAlias 'dingyue_debug'
+            keyPassword 'dingyue'
+            storeFile file('dingyue_debug.jks')
+            storePassword '123456'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
 }
