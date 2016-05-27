@@ -21,6 +21,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private Button btn3;
     private Button btn4;
     private CompositeSubscription subscription;
+    private Button btn5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         btn2 = (Button) findViewById(R.id.btn2);
         btn3 = (Button) findViewById(R.id.btn3);
         btn4 = (Button) findViewById(R.id.btn4);
+        btn5 = (Button) findViewById(R.id.btn5);
         getRxBus();
         initClick();
         subject();
@@ -55,6 +57,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         btn2.setOnClickListener(this);
         btn3.setOnClickListener(this);
         btn4.setOnClickListener(this);
+        btn5.setOnClickListener(this);
     }
 
     @Override
@@ -71,6 +74,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 break;
             case R.id.btn4:
 //                FeedbackAPI.openFeedbackActivity(this);
+                break;
+            case R.id.btn5:
+
                 break;
         }
     }
