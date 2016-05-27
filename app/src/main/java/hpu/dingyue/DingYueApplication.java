@@ -14,5 +14,6 @@ public class DingYueApplication extends Application {
         super.onCreate();
         x.Ext.init(this);
         x.Ext.setDebug(true);
+
     }
 }

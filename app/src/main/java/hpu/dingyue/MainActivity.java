@@ -1,7 +1,6 @@
 package hpu.dingyue;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
 import android.support.design.widget.TabLayout;
@@ -13,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -38,6 +40,8 @@ import java.util.Map;
 
 import hpu.dingyue.commonUtils.AnimationUtils;
 import hpu.dingyue.commonUtils.SharePreUtil;
+import hpu.dingyue.eventbus.LoginMessage;
+import hpu.dingyue.fragment.TabLayoutActivity;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -58,6 +62,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private TextView scale1;
     private TextView scale2;
     private Button btn6;
+
+    public static Intent getIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+//        intent.putExtra("username", "test100");
+//        intent.putExtra("password", "123456");
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,14 +98,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         scale1 = (TextView) findViewById(R.id.tv_scale1);
         scale2 = (TextView) findViewById(R.id.tv_scale2);
 
-        findViewById(R.id.tv_test).setOnClickListener(this);
-
+        findViewById(R.id.btn7).setOnClickListener(this);
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn:
+//                LoginMessage loginMessage = new LoginMessage();
+//                loginMessage.setUserName("sdfds");
+//                loginMessage.setPassword("123456");
+//                EventBus.getDefault().post(loginMessage);
                 /*new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -187,6 +202,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             public void onCompleted() {
                                 viewPager.setAdapter(myAdapter);
                                 tabLayout.setupWithViewPager(viewPager);
+                                tabLayout.getTabAt(0).setIcon(R.drawable.icon_new_talk_file1);
+                                tabLayout.getTabAt(1).setCustomView(getTabView());
                             }
 
                             @Override
@@ -283,8 +300,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             case R.id.btn6:
                 startActivity(new Intent(this, ExpandableListViewActivity.class));
                 break;
-            case R.id.tv_test:
-                Toast.makeText(this, "你点我了", Toast.LENGTH_SHORT).show();
+            case R.id.btn7:
+//                startActivity(new Intent(this, RadioActivity.class));
+                startActivity(new Intent(this, TabLayoutActivity.class));
                 break;
         }
     }
@@ -349,4 +367,26 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    private View getTabView() {
+        View view = LayoutInflater.from(this).inflate(R.layout.item_tab, null);
+        return view;
+    }
+
+    @Subscribe
+    public void s(LoginMessage msg) {
+        etText2.setText(msg.getUserName());
+        etText.setText(msg.getPassword());
+        Toast.makeText(this, msg.getPassword(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        EventBus.getDefault().unregister(this);
+    }
+
+
+
+
 }
