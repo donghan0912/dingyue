@@ -19,11 +19,16 @@ import java.util.List;
 import java.util.Random;
 
 import hpu.dingyue.R;
+import hpu.dingyue.net.Image;
+import hpu.dingyue.net.ImageUtils;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2016/4/25.
  */
-public class TabFragment1 extends Fragment {
+public class TabFragment1 extends Fragment implements View.OnClickListener{
 
     private RecyclerView mRecyclerView;
     private List<String> mData;
@@ -38,6 +43,7 @@ public class TabFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab1, null);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.rv);
+        view.findViewById(R.id.btn).setOnClickListener(this);
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), OrientationHelper.HORIZONTAL, false));
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, OrientationHelper.VERTICAL));
@@ -46,6 +52,8 @@ public class TabFragment1 extends Fragment {
         setRetainInstance(true);
         return view;
     }
+
+
 
     private void initData() {
         mData = new ArrayList<>();
@@ -56,6 +64,35 @@ public class TabFragment1 extends Fragment {
         }
 
         mRecyclerView.setAdapter(new TabAdapter());
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn:
+                ImageUtils.getImage().subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Image>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.e("error", e.toString());
+                            }
+
+                            @Override
+                            public void onNext(Image image) {
+                                Log.e("错误", "ssss");
+                                List<Image.Imgs> imgs = image.imgs;
+                                String imageUrl = imgs.get(0).imageUrl;
+                                Log.e("图片地址", imageUrl);
+                            }
+                        });
+                break;
+        }
     }
 
     class TabAdapter extends RecyclerView.Adapter<TabAdapter.MyViewHolder> {
