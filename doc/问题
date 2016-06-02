@@ -51,3 +51,6 @@ if (e instanceof HttpException) {
     } else if (e instanceof SocketTimeoutException) {
         Log.e("TAG", "连接超时");
     }
+
+#在线调色板
+http://mcg.mbitson.com/

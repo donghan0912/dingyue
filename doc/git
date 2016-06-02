@@ -3,3 +3,6 @@ git cherry-pick commitid(单独合并某次commit)
 
 git merge branch 合并分支
     如果合并有冲突，手动解决完冲突之后，再add、commit
+
+1. git fetch
+2. git rebase (rebase有冲突:手动解决冲突后,add,git rebase --continue)
