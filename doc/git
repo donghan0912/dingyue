@@ -6,3 +6,6 @@ git merge branch 合并分支
 
 1. git fetch
 2. git rebase (rebase有冲突:手动解决冲突后,add,git rebase --continue)
+
+#git常用撤销操作 git rm –cached application.log// 撤销跟踪某个文件(添加忽略文件)
+https://www.shiyanlou.com/questions/4693

@@ -115,6 +115,9 @@ public class ChatActivity extends Activity implements View.OnClickListener{
         public View getView(int position, View convertView, ViewGroup parent) {
             int type = getItemViewType(position);
             ViewHolder viewHolder;
+            if (mData.size() < 5) {
+                return convertView;
+            }
             if(convertView == null) {
                  viewHolder = new ViewHolder();
                 if (type == TYPE_IN) {

@@ -54,3 +54,13 @@ if (e instanceof HttpException) {
 
 #在线调色板
 http://mcg.mbitson.com/
+
+#Retrofit请求参数注解字段说明
+http://www.loongwind.com/archives/242.html
+
+#如果遇到无法解决问题
+    尝试使用try...catch...解决
+
+
+#Gradle 构建Android项目
+https://segmentfault.com/a/1190000002910311
