@@ -28,6 +28,10 @@
         <activity android:name=".fragment.TabLayoutActivity"
             android:configChanges="screenSize|orientation"/>
         <activity android:name=".rxbus.RxBusActivity"/>
+        <activity android:name=".RefreshTestActivity"/>
+        <activity android:name=".refreshActivity.ListViewActivity"/>
+        <activity android:name=".refreshActivity.RecyclerViewActivity"/>
+        <activity android:name=".refreshActivity.ScrollViewActivity"/>
     </application>
 
 </manifest>

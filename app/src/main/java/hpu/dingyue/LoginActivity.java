@@ -1,5 +1,6 @@
 package hpu.dingyue;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
@@ -76,7 +77,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 //                FeedbackAPI.openFeedbackActivity(this);
                 break;
             case R.id.btn5:
-
+                startActivity(new Intent(this, RefreshTestActivity.class));
                 break;
         }
     }
