@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.umeng.message.PushAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -100,6 +101,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         findViewById(R.id.btn7).setOnClickListener(this);
         EventBus.getDefault().register(this);
+
+        PushAgent agent = PushAgent.getInstance(this);
+        agent.setAlias("", "");
     }
 
     @Override

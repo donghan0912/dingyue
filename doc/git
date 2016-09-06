@@ -9,3 +9,6 @@ git merge branch 合并分支
 
 #git常用撤销操作 git rm –cached application.log// 撤销跟踪某个文件(添加忽略文件)
 https://www.shiyanlou.com/questions/4693
+
+#git pull 冲突（mearging）
+git reset --hard HEAD 撤销合并；
