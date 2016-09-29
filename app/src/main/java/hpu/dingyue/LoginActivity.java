@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.umeng.message.PushAgent;
 
+import hpu.dingyue.dao.greendao.UserDao;
 import hpu.dingyue.rxbus.RxBus;
 import hpu.dingyue.rxbus.RxBusActivity;
 import rx.functions.Action1;
@@ -237,5 +238,11 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 startActivityForResult(intent, 1);
             }
         }
+    }
+
+    // 数据库 参考：http://www.jianshu.com/p/853401a7d02b
+    private void test() {
+        UserDao userDao = DingYueApplication.getApplication().getDaoSession().getUserDao();
+
     }
 }
