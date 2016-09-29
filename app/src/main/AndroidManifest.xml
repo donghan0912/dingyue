@@ -32,6 +32,17 @@
         <activity android:name=".refreshActivity.ListViewActivity"/>
         <activity android:name=".refreshActivity.RecyclerViewActivity"/>
         <activity android:name=".refreshActivity.ScrollViewActivity"/>
+        <activity android:name=".ImageActivity"/>
+        <activity android:name=".ConstraintLayoutActivity"/>
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="56df05bce0f55acbbf000717">
+    </meta-data>
+    <meta-data
+        android:name="UMENG_MESSAGE_SECRET"
+        android:value="e8afe8d54fdf595a06ee18e4877d5adb">
+</meta-data>
     </application>
 
 </manifest>

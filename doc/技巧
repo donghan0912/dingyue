@@ -4,3 +4,6 @@ android xml文件中：
         <u></u> 下划线
 
 #布局CoordinatorLayout
+
+# 提升编译速度：在项目gradle.properties 文件下添加以下代码即可
+    android.enableBuildCache=true

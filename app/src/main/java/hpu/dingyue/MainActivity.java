@@ -74,6 +74,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PushAgent.getInstance(this).onAppStart();
         setContentView(R.layout.activity_main);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -102,8 +103,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         findViewById(R.id.btn7).setOnClickListener(this);
         EventBus.getDefault().register(this);
 
-        PushAgent agent = PushAgent.getInstance(this);
-        agent.setAlias("", "");
+//        PushAgent agent = PushAgent.getInstance(this);
+//        agent.setAlias("", "");
     }
 
     @Override

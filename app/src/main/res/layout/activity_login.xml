@@ -38,4 +38,11 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"/>
 
+    <ImageView
+        android:transitionName="image"
+        android:id="@+id/image"
+        android:src="@drawable/bg_guide1"
+        android:layout_width="120dp"
+        android:layout_height="160dp"/>
+
 </LinearLayout>
