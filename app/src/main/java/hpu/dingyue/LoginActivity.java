@@ -16,6 +16,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,9 @@ import android.widget.Toast;
 
 import com.umeng.message.PushAgent;
 
+import java.util.List;
+
+import hpu.dingyue.dao.User;
 import hpu.dingyue.dao.greendao.UserDao;
 import hpu.dingyue.rxbus.RxBus;
 import hpu.dingyue.rxbus.RxBusActivity;
@@ -97,8 +101,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
                 ActivityOptionsCompat options =
                         ActivityOptionsCompat.makeScaleUpAnimation(imageView, //The View that the new activity is animating from
-                                (int)imageView.getWidth()/2, (int)imageView.getHeight()/2, //拉伸开始的坐标
-                               0, 0);//拉伸开始的区域大小，这里用（0，0）表示从无到全屏
+                                (int) imageView.getWidth() / 2, (int) imageView.getHeight() / 2, //拉伸开始的坐标
+                                0, 0);//拉伸开始的区域大小，这里用（0，0）表示从无到全屏
                 startNewAcitivity(options);
                 break;
             case R.id.btn3:
@@ -107,7 +111,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             case R.id.btn4:
 //                FeedbackAPI.openFeedbackActivity(this);
 //                startActivity(new Intent(this, ConstraintLayoutActivity.class));
-                checkPermission();
+//                checkPermission();
+                test();
                 break;
             case R.id.btn5:
                 startActivity(new Intent(this, RefreshTestActivity.class));
@@ -115,9 +120,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             case R.id.image:
                 ActivityOptionsCompat options1;
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                     options1 =
+                    options1 =
                             ActivityOptionsCompat.makeScaleUpAnimation(v, //The View that the new activity is animating from
-                                    (int)v.getWidth()/2, (int)v.getHeight()/2, //拉伸开始的坐标
+                                    (int) v.getWidth() / 2, (int) v.getHeight() / 2, //拉伸开始的坐标
                                     0, 0);//拉伸开始的区域大小，这里用（0，0）表示从无到全屏
                 } else {
                     options1 = ActivityOptionsCompat.makeSceneTransitionAnimation(this, imageView, "image");
@@ -157,7 +162,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     }
 
     private void startNewAcitivity(ActivityOptionsCompat options) {
-        Intent intent = new Intent(this,ImageActivity.class);
+        Intent intent = new Intent(this, ImageActivity.class);
         ActivityCompat.startActivity(this, intent, options.toBundle());
     }
 
@@ -241,8 +246,31 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     }
 
     // 数据库 参考：http://www.jianshu.com/p/853401a7d02b
+    // http://www.jianshu.com/p/252555228b72
     private void test() {
-        UserDao userDao = DingYueApplication.getApplication().getDaoSession().getUserDao();
+        final UserDao userDao = DingYueApplication.getApplication().getDaoSession().getUserDao();
+        final User user = new User();
+        user.setAge(25);
+        user.setName("hahah");
+        user.setSex(1);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    userDao.insert(user);
+                }
+
+                List<User> users = userDao.loadAll();
+                User user1 = users.get(0);
+                Log.e("数据", user1.getName());
+
+                String path = DingYueApplication.getApplication().getDb().getPath();
+                Log.e("数据库路径", path);
+            }
+        }).start();
 
     }
+
+
 }
