@@ -249,15 +249,17 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     // http://www.jianshu.com/p/252555228b72
     private void test() {
         final UserDao userDao = DingYueApplication.getApplication().getDaoSession().getUserDao();
-        final User user = new User();
-        user.setAge(25);
-        user.setName("hahah");
-        user.setSex(1);
+//        final User user = new User();
+//        user.setAge(25);
+//        user.setName("hahah");
+//        user.setSex(1);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < 100; i++) {
+                    User user = new User("测试用户" + i, i, i);
+
                     userDao.insert(user);
                 }
 

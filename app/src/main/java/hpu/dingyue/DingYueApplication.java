@@ -14,8 +14,8 @@ import hpu.dingyue.dao.greendao.DaoSession;
  * Created by Administrator on 2016/3/21.
  */
 public class DingYueApplication extends Application {
-    private DaoMaster.DevOpenHelper mHelper;
     private SQLiteDatabase db;
+    private DaoMaster.DevOpenHelper mHelper;
     private DaoMaster mDaoMaster;
     private DaoSession mDaoSession;
     private static DingYueApplication application;
