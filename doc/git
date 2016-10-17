@@ -12,3 +12,9 @@ https://www.shiyanlou.com/questions/4693
 
 #git pull 冲突（mearging）
 git reset --hard HEAD 撤销合并；
+
+#创建并切换到新分支(即使在当前分支做的修改未提交，也能将改变的内容带到新分支)
+git checkout -b branchname(分支名)
+
+#提交本地分支到远程仓库
+git push origin test:master // 提交本地test分支作为远程的master分支
