@@ -253,7 +253,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 //        user.setAge(25);
 //        user.setName("hahah");
 //        user.setSex(1);
-
         new Thread(new Runnable() {
             @Override
             public void run() {
