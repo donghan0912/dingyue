@@ -271,5 +271,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             }
         }).start();
         Log.e("数据库路径","我是test3分支");
+
+
     }
 }
