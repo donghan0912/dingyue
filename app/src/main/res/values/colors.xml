@@ -7,4 +7,9 @@
     <color name="black">#000</color>
     <color name="blue">#87CEEB</color>
     <color name="tran">#00000000</color>
+    <color name="day_night">#a56</color>
+    <color name="bg">#87CEEB</color>
+    <color name="text_color">#87CEEB</color>
+    <color name="text_color_1">#ffffff</color>
+    <color name="transparent">#00000000</color>
 </resources>

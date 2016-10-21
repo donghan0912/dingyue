@@ -3,8 +3,8 @@ apply plugin: 'org.greenrobot.greendao'
 
 android {
 
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 24
+    buildToolsVersion '24.0.2'
     defaultConfig {
         applicationId "hpu.dingyue"
         minSdkVersion 14
@@ -58,12 +58,10 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.0'
     compile files('libs/jsoup-1.8.1.jar')
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'com.alibaba:fastjson:1.1.46.android'
-    compile 'com.android.support:design:23.3.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
@@ -74,5 +72,6 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     // 数据库
     compile 'org.greenrobot:greendao:3.2.0'
-
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:appcompat-v7:24.2.1'
 }

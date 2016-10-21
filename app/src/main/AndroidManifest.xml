@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:name=".DingYueApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity" android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -33,8 +33,13 @@
         <activity android:name=".refreshActivity.ListViewActivity"/>
         <activity android:name=".refreshActivity.RecyclerViewActivity"/>
         <activity android:name=".refreshActivity.ScrollViewActivity"/>
-        <activity android:name=".ImageActivity"/>
+        <activity android:name=".ImageActivity"
+            android:theme="@style/MyTheme"/>
         <activity android:name=".ConstraintLayoutActivity"/>
+        <activity android:name=".GoBackActivity"
+            android:theme="@style/MyTheme"/>
+        <activity android:name=".TranslateActivity"
+            />
 
         <meta-data
             android:name="UMENG_APPKEY"

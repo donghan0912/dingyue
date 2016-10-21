@@ -1,0 +1,205 @@
+package hpu.dingyue;
+
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/10/18.
+ */
+
+public class GoBackActivity extends AppCompatActivity {
+
+    private List<String> list;
+    private boolean scrollFlag = false;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_go_back);
+        setContentView(R.layout.activity_go_back_toolbar);
+//        setContentView(R.layout.activity_go_back_tool);
+//        final ListView listView = (ListView) findViewById(R.id.list_view);
+//        list = new ArrayList<>();
+//        for (int i = 0; i < 50; i++) {
+//            list.add("这是第" + i + "条数据");
+//        }
+//        listView.setAdapter(new BackAdapter());
+//        final Button button = (Button) findViewById(R.id.btn);
+//
+//        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(AbsListView view, int scrollState) {
+//                int position = listView.getFirstVisiblePosition();
+//                Log.e("位置", position + "");
+//                if (scrollState == SCROLL_STATE_IDLE && position > 6) {
+////                    scrollFlag = true;
+//                    button.setVisibility(View.VISIBLE);
+//                } else {
+////                    scrollFlag = false;
+//                    button.setVisibility(View.GONE);
+//                }
+//            }
+//
+//            @Override
+//            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+////                Log.e("滑动", scrollFlag + "");
+////                if (scrollFlag && firstVisibleItem > 5) {
+////                    button.setVisibility(View.VISIBLE);
+////                } else {
+////                    button.setVisibility(View.GONE);
+////                }
+//            }
+//        });
+//
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                listView.setSelection(0);
+//            }
+//        });
+        final Button btn = (Button) findViewById(R.id.btn);
+
+        final CoordinatorLayout root = (CoordinatorLayout) findViewById(R.id.root);
+
+        findViewById(R.id.day).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                showAnimation();
+                Bitmap bitmap = getBitmap();
+                Intent intent = TranslateActivity.getIntent(GoBackActivity.this, bitmap);
+                startActivity(intent);
+
+//                btn.setVisibility(View.VISIBLE);
+//                root.setBackgroundResource(R.color.black);
+//                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                recreate();
+            }
+        });
+
+        findViewById(R.id.night).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAnimation();
+                btn.setVisibility(View.GONE);
+                root.setBackgroundResource(R.color.white);
+//                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                recreate();
+            }
+        });
+
+    }
+
+    class BackAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            convertView = View.inflate(GoBackActivity.this, R.layout.listview_item_left, null);
+            TextView textView = (TextView) convertView.findViewById(R.id.tv_left);
+            textView.setText(list.get(position));
+            return convertView;
+        }
+    }
+
+    private Bitmap getBitmap() {
+        final View decorView = getWindow().getDecorView();
+        Bitmap cacheBitmap = getCacheBitmapFromView(decorView);
+        return cacheBitmap;
+    }
+
+
+    /**
+     * 展示一个切换动画
+     */
+    private void showAnimation() {
+        final View decorView = getWindow().getDecorView();
+        Bitmap cacheBitmap = getCacheBitmapFromView(decorView);
+        if (decorView instanceof ViewGroup && cacheBitmap != null) {
+            final View view = new View(this);
+            view.setBackgroundDrawable(new BitmapDrawable(getResources(), cacheBitmap));
+            ViewGroup.LayoutParams layoutParam = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
+            ((ViewGroup) decorView).addView(view, layoutParam);
+            ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(view, "alpha", 1f, 0f);
+            objectAnimator.setDuration(3000);
+            objectAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    ((ViewGroup) decorView).removeView(view);
+                }
+            });
+            objectAnimator.start();
+        }
+    }
+
+    /**
+     * 获取一个 View 的缓存视图
+     *
+     * @param view
+     * @return
+     */
+    private Bitmap getCacheBitmapFromView(View view) {
+        final boolean drawingCacheEnabled = true;
+        view.setDrawingCacheEnabled(drawingCacheEnabled);
+        view.buildDrawingCache(drawingCacheEnabled);
+        final Bitmap drawingCache = view.getDrawingCache();
+        Bitmap bitmap;
+        if (drawingCache != null) {
+            bitmap = Bitmap.createBitmap(drawingCache);
+            view.setDrawingCacheEnabled(false);
+        } else {
+            bitmap = null;
+        }
+        return bitmap;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        showAnimation();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        showAnimation();
+    }
+}

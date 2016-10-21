@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="day_night">#f56</color>
+    <color name="bg">#ffaaaa</color>
+    <color name="text_color">#ffaaaa</color>
+    <color name="text_color_1">#ff00aa</color>
+</resources>

@@ -37,4 +37,7 @@
         <!--模糊-->
         <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
     </style>
+
+
+
 </resources>

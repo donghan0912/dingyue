@@ -1,0 +1,9 @@
+
+1. CoordinatorLayout
+    AppBarLayout
+        Toolbar
+    NestedScrollView 可以让toolbar 滑动隐藏消失
+
+    RecyclerView 可以直接使用，其它控件需要用NestedScrollView 包裹;
+
+# toolbar 主题切换可参考 'https://github.com/Freelander/Elephant' 该项目

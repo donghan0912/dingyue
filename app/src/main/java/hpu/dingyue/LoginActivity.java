@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,9 @@ import hpu.dingyue.rxbus.RxBusActivity;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
+import static hpu.dingyue.R.id.btn6;
+import static hpu.dingyue.R.id.btn7;
+
 /**
  * Created by Administrator on 2016/5/3.
  */
@@ -46,6 +50,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private Button btn4;
     private CompositeSubscription subscription;
     private Button btn5;
+    private Button btn6;
+    private Button btn7;
     private ImageView imageView;
 
     @Override
@@ -61,6 +67,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         btn3 = (Button) findViewById(R.id.btn3);
         btn4 = (Button) findViewById(R.id.btn4);
         btn5 = (Button) findViewById(R.id.btn5);
+        btn6 = (Button) findViewById(R.id.btn6);
+        btn7 = (Button) findViewById(R.id.btn7);
         getRxBus();
         initClick();
         subject();
@@ -115,7 +123,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 test();
                 break;
             case R.id.btn5:
-                startActivity(new Intent(this, RefreshTestActivity.class));
+//                startActivity(new Intent(this, RefreshTestActivity.class));
+                startActivity(new Intent(this, GoBackActivity.class));
                 break;
             case R.id.image:
                 ActivityOptionsCompat options1;
@@ -129,6 +138,12 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 }
 
                 startNewAcitivity(options1);
+                break;
+
+            case R.id.btn6:
+
+                break;
+            case R.id.btn7:
                 break;
         }
     }

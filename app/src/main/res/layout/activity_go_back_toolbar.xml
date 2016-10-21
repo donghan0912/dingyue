@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/root"
+    android:background="@color/bg"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            app:layout_scrollFlags="enterAlways|scroll"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <!--<ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/day"
+                android:text="日间模式"
+                android:textColor="?attr/text_color_1"
+                android:background="@color/day_night"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/night"
+                android:text="夜间模式"
+                android:textColor="@color/text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/btn"
+                android:text="-------------"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+        <!--<TextView-->
+            <!--android:padding="80dp"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="123sdfffffffffffffffffffffffffffffffffffffffffffffffffff123sdfffffffffffffffffffffffffffffffffffffffffffffffffff123sdfffffffffffffffffffffffffffffffffffffffffffffffffff123sdfffffffffffffffffffffffffffffffffffffffffffffffffff123sdfffffffffffffffffffffffffffffffffffffffffffffffffff123sdfffffffffffffffffffffffffffffffffffffffffffffffffff123sdfffffffffffffffffffffffffffffffffffffffffffffffffff123sdfffffffffffffffffffffffffffffffffffffffffffffffffff123sdfffffffffffffffffffffffffffffffffffffffffffffffffff123sdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"-->
+            <!--android:textSize="20sp"/>-->
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+</android.support.design.widget.CoordinatorLayout>
