@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -12,13 +13,19 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
+
+import hpu.dingyue.commonUtils.MemCacheHelper;
+import hpu.dingyue.commonUtils.SharePreUtil;
+import hpu.dingyue.commonUtils.UIUtils;
 
 /**
  * Created by Administrator on 2016/10/18.
@@ -28,6 +35,8 @@ public class GoBackActivity extends AppCompatActivity {
 
     private List<String> list;
     private boolean scrollFlag = false;
+    private static final String KEY_SCREEN_CAPTURE = "haha";
+    private int mDayNightMode = AppCompatDelegate.MODE_NIGHT_NO;
 
     @Override
     protected void onResume() {
@@ -81,21 +90,64 @@ public class GoBackActivity extends AppCompatActivity {
 //            }
 //        });
         final Button btn = (Button) findViewById(R.id.btn);
-
         final CoordinatorLayout root = (CoordinatorLayout) findViewById(R.id.root);
+
+
+//        int uiMode = getResources().getConfiguration().uiMode;
+//        int dayNightUiMode = uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+//        if (dayNightUiMode == Configuration.UI_MODE_NIGHT_NO) {
+//            mDayNightMode = AppCompatDelegate.MODE_NIGHT_NO;
+//        } else if (dayNightUiMode == Configuration.UI_MODE_NIGHT_YES) {
+//            mDayNightMode = AppCompatDelegate.MODE_NIGHT_YES;
+//        } else {
+//            mDayNightMode = AppCompatDelegate.MODE_NIGHT_AUTO;
+//        }
+
+            mDayNightMode = SharePreUtil.getIntance(this).getInt();
 
         findViewById(R.id.day).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                showAnimation();
-                Bitmap bitmap = getBitmap();
-                Intent intent = TranslateActivity.getIntent(GoBackActivity.this, bitmap);
-                startActivity(intent);
+//                Bitmap bitmap = getBitmap();
+//                Intent intent = TranslateActivity.getIntent(GoBackActivity.this, bitmap);
+//                startActivity(intent);
 
 //                btn.setVisibility(View.VISIBLE);
 //                root.setBackgroundResource(R.color.black);
-//                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                recreate();
+
+//                recreate();
+                if (mDayNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                    SharePreUtil.getIntance(GoBackActivity.this).setInt(AppCompatDelegate.MODE_NIGHT_NO);
+                    // 截图并将图片存储到hashMap中
+                    MemCacheHelper.getInstance().put(KEY_SCREEN_CAPTURE,
+                            UIUtils.captureContent(GoBackActivity.this));
+                    //做为假象截屏替换黑屏
+                    Intent starter = new Intent(GoBackActivity.this, CaptureActivity.class);
+                    starter.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    starter.putExtra("PARAM_MEM_CACHE_KEY", KEY_SCREEN_CAPTURE);
+                    startActivity(starter);
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    Toast.makeText(GoBackActivity.this, "白天", Toast.LENGTH_SHORT).show();
+                    recreate();
+                } else {
+                    SharePreUtil.getIntance(GoBackActivity.this).setInt(AppCompatDelegate.MODE_NIGHT_YES);
+                    // 截图并将图片存储到hashMap中
+                    MemCacheHelper.getInstance().put(KEY_SCREEN_CAPTURE,
+                            UIUtils.captureContent(GoBackActivity.this));
+                    //做为假象截屏替换黑屏
+                    Intent starter = new Intent(GoBackActivity.this, CaptureActivity.class);
+                    starter.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    starter.putExtra("PARAM_MEM_CACHE_KEY", KEY_SCREEN_CAPTURE);
+                    startActivity(starter);
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    Toast.makeText(GoBackActivity.this, "黑夜", Toast.LENGTH_SHORT).show();
+                    recreate();
+                }
+
+
+
             }
         });
 
@@ -105,8 +157,13 @@ public class GoBackActivity extends AppCompatActivity {
                 showAnimation();
                 btn.setVisibility(View.GONE);
                 root.setBackgroundResource(R.color.white);
-//                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 recreate();
+
+
+
+
+
             }
         });
 
@@ -191,15 +248,4 @@ public class GoBackActivity extends AppCompatActivity {
         return bitmap;
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        showAnimation();
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        showAnimation();
-    }
 }

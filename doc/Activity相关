@@ -1,0 +1,13 @@
+#Activity 取消切换动画 (待整理)
+    1. A → B (A 不finish())
+    intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    2. A → B (A finish()掉)
+    已解决，搜stackOverflow上找到的方法。
+    startActivity();打开一个Intent.FLAG_ACTIVITY_NO_ANIMATION的Intent。
+    自己在调用finish();
+    最后在finish()后加上，overridePendingTransition(0, 0)。就行了
+
+#
+
+
+

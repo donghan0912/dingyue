@@ -2,6 +2,7 @@ package hpu.dingyue;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.umeng.message.IUmengRegisterCallback;
@@ -20,6 +21,10 @@ public class DingYueApplication extends Application {
     private DaoSession mDaoSession;
     private static DingYueApplication application;
 
+//    static {
+//        AppCompatDelegate.setDefaultNightMode(
+//                AppCompatDelegate.MODE_NIGHT_NO);
+//    }
 
     @Override
     public void onCreate() {

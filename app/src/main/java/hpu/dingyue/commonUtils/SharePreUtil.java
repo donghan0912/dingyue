@@ -3,6 +3,8 @@ package hpu.dingyue.commonUtils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import static android.R.attr.value;
+
 /**
  * Created by Administrator on 2016/3/18.
  */
@@ -33,7 +35,15 @@ public class SharePreUtil {
     private String getString(String str_key) {
         return mSharedPreferences.getString(str_key, "");
     }
-    
+
+    private void setInt(String str_key, int value) {
+        editor.putInt(str_key, value);
+        editor.apply();
+    }
+
+    private int getInt(String str_key) {
+        return mSharedPreferences.getInt(str_key, 1);
+    }
     private void setLong(String str_key, long value) {
         editor.putLong(str_key, value);
         editor.apply();
@@ -58,6 +68,14 @@ public class SharePreUtil {
 
     public String getKey() {
         return getString("test");
+    }
+
+    public void setInt(int value) {
+        setInt("mode", value);
+    }
+
+    public int getInt() {
+        return getInt("mode");
     }
 
 }

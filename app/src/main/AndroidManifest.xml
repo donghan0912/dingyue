@@ -40,6 +40,8 @@
             android:theme="@style/MyTheme"/>
         <activity android:name=".TranslateActivity"
             />
+        <activity android:name=".CaptureActivity"
+                  android:theme="@style/MyTheme"/>
 
         <meta-data
             android:name="UMENG_APPKEY"
