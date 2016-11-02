@@ -12,4 +12,5 @@
     <color name="text_color">#87CEEB</color>
     <color name="text_color_1">#ffffff</color>
     <color name="transparent">#00000000</color>
+    <color name="toolbar">#303Fff</color>
 </resources>

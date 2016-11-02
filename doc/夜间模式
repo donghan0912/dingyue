@@ -1,0 +1,5 @@
+
+1. 该方法仅对当前页面生效
+    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+2. 该方法对整个App生效，并且需要重启Activity(recreate()) // 注：第二个方法，会被第一个方法覆盖
+    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);

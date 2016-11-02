@@ -103,15 +103,15 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 startActivity(MainActivity.getIntent(this));
                 break;
             case R.id.btn2:
-//                startActivity(RxBusActivity.getIntent(this));
-//                overridePendingTransition(R.anim.put, R.anim.out);
+                startActivity(RxBusActivity.getIntent(this));
+                overridePendingTransition(R.anim.put, R.anim.out);
 //                ActivityOptionsCompat options = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.put, R.anim.out);
 
-                ActivityOptionsCompat options =
-                        ActivityOptionsCompat.makeScaleUpAnimation(imageView, //The View that the new activity is animating from
-                                (int) imageView.getWidth() / 2, (int) imageView.getHeight() / 2, //拉伸开始的坐标
-                                0, 0);//拉伸开始的区域大小，这里用（0，0）表示从无到全屏
-                startNewAcitivity(options);
+//                ActivityOptionsCompat options =
+//                        ActivityOptionsCompat.makeScaleUpAnimation(imageView, //The View that the new activity is animating from
+//                                (int) imageView.getWidth() / 2, (int) imageView.getHeight() / 2, //拉伸开始的坐标
+//                                0, 0);//拉伸开始的区域大小，这里用（0，0）表示从无到全屏
+//                startNewAcitivity(options);
                 break;
             case R.id.btn3:
                 showDg();

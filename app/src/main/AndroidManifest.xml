@@ -28,7 +28,8 @@
         <activity android:name=".RadioActivity"/>
         <activity android:name=".fragment.TabLayoutActivity"
             android:configChanges="screenSize|orientation"/>
-        <activity android:name=".rxbus.RxBusActivity"/>
+        <activity android:name=".rxbus.RxBusActivity"
+                  android:theme="@style/MyTheme"/>
         <activity android:name=".RefreshTestActivity"/>
         <activity android:name=".refreshActivity.ListViewActivity"/>
         <activity android:name=".refreshActivity.RecyclerViewActivity"/>

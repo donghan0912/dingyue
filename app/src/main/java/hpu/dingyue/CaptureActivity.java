@@ -3,10 +3,16 @@ package hpu.dingyue;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import hpu.dingyue.commonUtils.ActivityCollection;
@@ -54,7 +60,9 @@ public class CaptureActivity extends AppCompatActivity {
             return;
         // 找控件，设置背景图
         final ImageView imageView = (ImageView) findViewById(R.id.iv_fullImage);
-        imageView.setImageBitmap(bitmap);
+//        imageView.setImageBitmap(bitmap);
+
+        getWindow().getDecorView().setBackgroundDrawable(new BitmapDrawable(getResources(), bitmap));
 
         new Handler().postDelayed(new Runnable() {
             public void run() {
@@ -64,4 +72,18 @@ public class CaptureActivity extends AppCompatActivity {
             }
         }, 100);
     }
+
+    /**
+     * 切换状态栏颜色值
+     * @param colorValue 颜色值
+     */
+    private void changeStatusColor(int colorValue) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, colorValue));
+        }
+    }
+
 }

@@ -6,10 +6,16 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import hpu.dingyue.R;
 
 /**
@@ -18,18 +24,27 @@ import hpu.dingyue.R;
 public class LeftFragment extends Fragment implements View.OnClickListener {
 
     private RxBus rxBus;
+    private Unbinder unbinder;
+    @BindView(R.id.btn6) Button btn6;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment1, null);
-        view.findViewById(R.id.btn1).setOnClickListener(this);
-        view.findViewById(R.id.btn2).setOnClickListener(this);
-        view.findViewById(R.id.btn3).setOnClickListener(this);
-        view.findViewById(R.id.btn4).setOnClickListener(this);
-        view.findViewById(R.id.btn5).setOnClickListener(this);
-        rxBus = ((RxBusActivity)getActivity()).getRxBusSingleton();
+//        view.findViewById(R.id.btn1).setOnClickListener(this);
+//        view.findViewById(R.id.btn2).setOnClickListener(this);
+//        view.findViewById(R.id.btn3).setOnClickListener(this);
+//        view.findViewById(R.id.btn4).setOnClickListener(this);
+//        view.findViewById(R.id.btn5).setOnClickListener(this);
+        rxBus = ((RxBusActivity) getActivity()).getRxBusSingleton();
+
+        unbinder = ButterKnife.bind(this, view);
         return view;
+    }
+
+    @OnClick(R.id.btn6)
+    public void test() {
+        Toast.makeText(getActivity(), "dsf", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -41,6 +56,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -79,16 +95,26 @@ public class LeftFragment extends Fragment implements View.OnClickListener {
                 }
 //                EventBus.getDefault().post("555555555555555");
                 break;
+            case R.id.btn6:
+
+                break;
         }
     }
 
     // 模拟数据
     List<String> list = new ArrayList<>();
+
     public List getData(int p) {
         list.clear();
-        for (int i = 0; i <= p+3; i++) {
+        for (int i = 0; i <= p + 3; i++) {
             list.add("这是第" + p + "项的第" + i + "条数据");
         }
         return list;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }

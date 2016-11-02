@@ -128,7 +128,8 @@ public class GoBackActivity extends AppCompatActivity {
                     starter.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     starter.putExtra("PARAM_MEM_CACHE_KEY", KEY_SCREEN_CAPTURE);
                     startActivity(starter);
-                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     Toast.makeText(GoBackActivity.this, "白天", Toast.LENGTH_SHORT).show();
                     recreate();
                 } else {
@@ -141,7 +142,8 @@ public class GoBackActivity extends AppCompatActivity {
                     starter.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     starter.putExtra("PARAM_MEM_CACHE_KEY", KEY_SCREEN_CAPTURE);
                     startActivity(starter);
-                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     Toast.makeText(GoBackActivity.this, "黑夜", Toast.LENGTH_SHORT).show();
                     recreate();
                 }

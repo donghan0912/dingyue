@@ -25,10 +25,12 @@ public class UIUtils {
         int height = activity.getWindowManager().getDefaultDisplay()
                 .getHeight();
         // 去掉标题栏
-        Bitmap b = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height
-                - statusBarHeight);
+//        Bitmap b = Bitmap.createBitmap(b1, 0, statusBarHeight, width, height
+//                - statusBarHeight);
+        Bitmap bb = Bitmap.createBitmap(b1);
         view.destroyDrawingCache();
-        return b;
+//        return b;
+        return bb;
     }
 
     /**

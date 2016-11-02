@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.app.AppCompatActivity;
 
 import hpu.dingyue.R;
 
 /**
  * Created by Administrator on 2016/5/3.
  */
-public class RxBusActivity extends Activity {
+public class RxBusActivity extends AppCompatActivity {
 
     public static Intent getIntent(Context context) {
         Intent intent = new Intent(context, RxBusActivity.class);

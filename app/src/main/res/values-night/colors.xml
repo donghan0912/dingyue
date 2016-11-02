@@ -4,4 +4,5 @@
     <color name="bg">#ffaaaa</color>
     <color name="text_color">#ffaaaa</color>
     <color name="text_color_1">#ff00aa</color>
+    <color name="toolbar">#404040</color>
 </resources>
