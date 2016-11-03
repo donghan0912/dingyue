@@ -3,11 +3,13 @@ package hpu.dingyue.rxbus;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.BottomSheetDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,13 @@ public class LeftFragment extends Fragment implements View.OnClickListener {
 
     private RxBus rxBus;
     private Unbinder unbinder;
-    @BindView(R.id.btn6) Button btn6;
+    @BindView(R.id.btn6)
+    Button btn6;
+    @BindView(R.id.layout)
+    RelativeLayout layout;
+    @BindView(R.id.btn7)
+    Button btn7;
+    private BottomSheetBehavior<RelativeLayout> behavior;
 
     @Nullable
     @Override
@@ -39,12 +47,10 @@ public class LeftFragment extends Fragment implements View.OnClickListener {
         rxBus = ((RxBusActivity) getActivity()).getRxBusSingleton();
 
         unbinder = ButterKnife.bind(this, view);
+        behavior = BottomSheetBehavior.from(layout);
+//默认设置为隐藏
+        behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         return view;
-    }
-
-    @OnClick(R.id.btn6)
-    public void test() {
-        Toast.makeText(getActivity(), "dsf", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -56,7 +62,7 @@ public class LeftFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6})
+    @OnClick({R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.layout, R.id.btn7})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -93,10 +99,17 @@ public class LeftFragment extends Fragment implements View.OnClickListener {
                 if (rxBus.hasObservers()) {
                     rxBus.send(data5);
                 }
+//                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 //                EventBus.getDefault().post("555555555555555");
                 break;
             case R.id.btn6:
-
+                behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                break;
+            case R.id.btn7:
+                showBottomDialog();
+                break;
+            case R.id.layout:
+//                behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 break;
         }
     }
@@ -116,5 +129,12 @@ public class LeftFragment extends Fragment implements View.OnClickListener {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    private void showBottomDialog() {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.listview_item_left, null);
+        bottomSheetDialog.setContentView(view);
+        bottomSheetDialog.show();
     }
 }
