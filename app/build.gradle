@@ -2,16 +2,23 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'android-apt'
 
+def libs = rootProject.ext.librarys     // 常用配置
+def cfg = rootProject.ext.configuration // 引用库配置
+
 android {
 
-    compileSdkVersion 24
-    buildToolsVersion '24.0.2'
+//    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion project.ANDROID_BUILD_SDK_VERSION as int
+    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
     defaultConfig {
         applicationId "hpu.dingyue"
-        minSdkVersion 14
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode cfg.versionCode
+        versionName cfg.versionName
+        // 参数的类型\变量名\位置三个部分,代码中调用BuildConfig.xxx，例如BuildConfig.API_BASE_URL
+        buildConfigField("String", "API_BASE_URL", "\"${API_BASE_URL}\"")
+        buildConfigField("String", "GOOGLE_URL", "\"https://www.google.com\"")
     }
 
     signingConfigs {
@@ -60,7 +67,8 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile files('libs/jsoup-1.8.1.jar')
-    compile 'io.reactivex:rxandroid:1.1.0'
+//    compile 'io.reactivex:rxandroid:1.0.0'
+    compile "io.reactivex:rxandroid:${libs.rxandroid}"
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'com.alibaba:fastjson:1.1.46.android'
     compile 'org.greenrobot:eventbus:3.0.0'
@@ -73,8 +81,11 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     // 数据库
     compile 'org.greenrobot:greendao:3.2.0'
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:' + rootProject.ext.supportLibVersion
+//    compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibVersion
+    // 以下两种都是配置在project.properties文件中，只不过引用方式不一样
+//    compile 'com.android.support:appcompat-v7:' + project.SUPPORT_LIBRARY_VERSION
+    compile "com.android.support:appcompat-v7: ${SUPPORT_LIBRARY_VERSION}"// 注意双引号
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }
