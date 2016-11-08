@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -16,8 +17,8 @@ import android.view.View;
 
 public class DemoDecoration extends RecyclerView.ItemDecoration {
 
-    private static final int[] ATTRS = new int[] { android.R.attr.listDivider };
-//    private static final int[] ATTRS = new int[] { R.color.black };
+//    private static final int[] ATTRS = new int[] { android.R.attr.listDivider };
+    private static final int[] ATTRS = new int[] { R.attr.divide_line };
     private Drawable mDivider;
 
     public DemoDecoration(Context context)
@@ -25,6 +26,10 @@ public class DemoDecoration extends RecyclerView.ItemDecoration {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
         a.recycle();
+    }
+
+    public DemoDecoration(Context context, int resId) {
+        mDivider = ContextCompat.getDrawable(context, resId);
     }
 
     @Override
@@ -159,17 +164,76 @@ public class DemoDecoration extends RecyclerView.ItemDecoration {
     {
         int spanCount = getSpanCount(parent);
         int childCount = parent.getAdapter().getItemCount();
-        if (isLastRaw(parent, itemPosition, spanCount, childCount))// 如果是最后一行，则不需要绘制底部
-        {
-            outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
-        } else if (isLastColum(parent, itemPosition, spanCount, childCount))// 如果是最后一列，则不需要绘制右边
-        {
-            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
-        } else
-        {
+//        if (isLastRaw(parent, itemPosition, spanCount, childCount))// 如果是最后一行，则不需要绘制底部
+//        {
+//            outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+//        } else if (isLastColum(parent, itemPosition, spanCount, childCount))// 如果是最后一列，则不需要绘制右边
+//        {
+//            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
+//        } else
+//        {
             outRect.set(0, 0, mDivider.getIntrinsicWidth(),
                     mDivider.getIntrinsicHeight());
+//        }
+    }
+
+
+
+   /* @Override
+    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+
+            drawVertical(c, parent);
+            drawHorizontal(c, parent);
+
+    }
+
+    public void drawVertical(Canvas c, RecyclerView parent) {
+        if (parent.getChildCount() == 0) return;
+
+        final int left = parent.getPaddingLeft();
+        final int right = parent.getWidth() - parent.getPaddingRight();
+
+        final View child = parent.getChildAt(0);
+        if (child.getHeight() == 0) return;
+
+        final RecyclerView.LayoutParams params =
+                (RecyclerView.LayoutParams) child.getLayoutParams();
+        int top = child.getBottom() + params.bottomMargin + mDivider.getIntrinsicHeight();
+        int bottom = top + mDivider.getIntrinsicHeight();
+
+        final int parentBottom = parent.getHeight() - parent.getPaddingBottom();
+        while (bottom < parentBottom) {
+            mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+
+            top += mDivider.getIntrinsicHeight() + params.topMargin + child.getHeight() + params.bottomMargin + mDivider.getIntrinsicHeight();
+            bottom = top + mDivider.getIntrinsicHeight();
         }
     }
+
+    public void drawHorizontal(Canvas c, RecyclerView parent) {
+        final int top = parent.getPaddingTop();
+        final int bottom = parent.getHeight() - parent.getPaddingBottom();
+
+        final int childCount = parent.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            final View child = parent.getChildAt(i);
+            final RecyclerView.LayoutParams params =
+                    (RecyclerView.LayoutParams) child.getLayoutParams();
+            final int left = child.getRight() + params.rightMargin + mDivider.getIntrinsicHeight();
+            final int right = left + mDivider.getIntrinsicWidth();
+            mDivider.setBounds(left, top, right, bottom);
+            mDivider.draw(c);
+        }
+    }
+
+    @Override
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+
+            outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+
+    }*/
+
+
 
 }

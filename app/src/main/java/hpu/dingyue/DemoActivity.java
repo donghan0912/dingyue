@@ -22,7 +22,8 @@ public class DemoActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
         recyclerView.setLayoutManager(layoutManager);
-        DemoDecoration decoration = new DemoDecoration(this);
+//        DemoDecoration decoration = new DemoDecoration(this);
+        DemoDecoration decoration = new DemoDecoration(this, R.drawable.divider);
         recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(new DemoAdapter());
     }
@@ -44,7 +45,7 @@ public class DemoActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 80;
+            return 78;
         }
 
 

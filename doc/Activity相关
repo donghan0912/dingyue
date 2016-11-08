@@ -7,7 +7,30 @@
     自己在调用finish();
     最后在finish()后加上，overridePendingTransition(0, 0)。就行了
 
-#
+intent 跳转：（使用场合：链接跳转）
+// 1. 通过浏览器跳转
+Uri parse = Uri.parse("http://www.baidu.com");
+                Intent intent2 = new Intent(Intent.ACTION_VIEW, parse);
+                String msg = intent2.toUri(Intent.URI_INTENT_SCHEME);
+                Log.e("intent to uri", msg);
 
+
+// 2. intent 内部跳转
+                Intent intent = new Intent();
+                intent.putExtra("from", 6);
+                intent.putExtra("url", "http://www.baidu.com");
+                ComponentName name = new ComponentName("cn.wanxue.gaoshou", "cn.wanxue.gaoshou.base.BaseWebActivity");
+                intent.setComponent(name);
+                String uri = intent.toUri(Intent.URI_INTENT_SCHEME);
+
+                Log.e("intent to uri", uri);
+
+                try {
+//                    Intent intent1 = Intent.parseUri(uri, Intent.URI_INTENT_SCHEME);
+                    Intent intent1 = Intent.parseUri(msg, Intent.URI_INTENT_SCHEME);
+                    startActivity(intent1);
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
 
 

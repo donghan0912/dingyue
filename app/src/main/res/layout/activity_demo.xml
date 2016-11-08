@@ -1,12 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:divider="@drawable/divider_translate"
+        android:showDividers="middle"
+        android:paddingTop="30dp"
+        android:id="@+id/tv"
+        android:layout_width="98dp"
+        android:layout_height="match_parent"
+        android:background="#8033cccc"
+        android:orientation="vertical">
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="知识模块1"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="知识模块2"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="知识模块3"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="知识模块4"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="知识模块5"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="知识模块6"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="知识模块7"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
     <HorizontalScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,53 +86,69 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:background="#0f0e0e"
+                android:divider="@drawable/divider"
+                android:orientation="horizontal"
+                android:showDividers="middle">
 
                 <TextView
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:gravity="center"
-                    android:text="标准任务"/>
+                    android:text="标准任务" />
 
                 <TextView
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:gravity="center"
-                    android:text="标准任务"/>
+                    android:text="标准任务" />
 
                 <TextView
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:gravity="center"
-                    android:text="标准任务"/>
+                    android:text="标准任务" />
 
                 <TextView
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:gravity="center"
-                    android:text="标准任务"/>
+                    android:text="标准任务" />
 
                 <TextView
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:gravity="center"
-                    android:text="标准任务"/>
+                    android:text="标准任务" />
 
                 <TextView
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
                     android:layout_width="80dp"
                     android:layout_height="30dp"
                     android:gravity="center"
-                    android:text="标准任务"/>
+                    android:text="标准任务" />
 
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
-                android:paddingBottom="10dp"
                 android:id="@+id/recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"/>
+                android:background="@color/white"
+                android:paddingBottom="10dp" />
         </LinearLayout>
+
     </HorizontalScrollView>
 
-</LinearLayout>
+</RelativeLayout>
