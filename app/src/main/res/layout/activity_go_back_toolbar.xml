@@ -33,11 +33,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <Button
+            <!--<Button
                 android:id="@+id/day"
                 android:text="日间模式"
-                android:textColor="?attr/text_color_1"
+                android:textColor="@color/text_color"
                 android:background="@color/day_night"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>-->
+
+            <android.support.v7.widget.SwitchCompat
+                app:switchMinWidth="58dp"
+                app:thumbTint="@color/switch_compat_thumb_selector"
+                app:trackTint="@color/switch_compat_track_selector"
+                android:checked="true"
+                android:id="@+id/day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

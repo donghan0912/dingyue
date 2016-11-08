@@ -43,6 +43,8 @@
             />
         <activity android:name=".CaptureActivity"
                   android:theme="@style/MyTheme"/>
+        <activity android:name=".modules.setting.SettingActivity"/>
+        <activity android:name=".DemoActivity"/>
 
         <meta-data
             android:name="UMENG_APPKEY"

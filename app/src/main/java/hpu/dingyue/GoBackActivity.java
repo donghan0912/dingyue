@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import hpu.dingyue.commonUtils.MemCacheHelper;
 import hpu.dingyue.commonUtils.SharePreUtil;
 import hpu.dingyue.commonUtils.UIUtils;
@@ -31,12 +35,14 @@ import hpu.dingyue.commonUtils.UIUtils;
  * Created by Administrator on 2016/10/18.
  */
 
-public class GoBackActivity extends AppCompatActivity {
+public class GoBackActivity extends AppCompatActivity implements View.OnClickListener{
 
     private List<String> list;
     private boolean scrollFlag = false;
     private static final String KEY_SCREEN_CAPTURE = "haha";
     private int mDayNightMode = AppCompatDelegate.MODE_NIGHT_NO;
+    @BindView(R.id.day)
+    SwitchCompat mSwitch;
 
     @Override
     protected void onResume() {
@@ -49,6 +55,7 @@ public class GoBackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_go_back);
         setContentView(R.layout.activity_go_back_toolbar);
+        ButterKnife.bind(this);
 //        setContentView(R.layout.activity_go_back_tool);
 //        final ListView listView = (ListView) findViewById(R.id.list_view);
 //        list = new ArrayList<>();
@@ -106,7 +113,7 @@ public class GoBackActivity extends AppCompatActivity {
 
             mDayNightMode = SharePreUtil.getIntance(this).getInt();
 
-        findViewById(R.id.day).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.day).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                showAnimation();
@@ -151,7 +158,7 @@ public class GoBackActivity extends AppCompatActivity {
 
 
             }
-        });
+        });*/
 
         findViewById(R.id.night).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,6 +176,44 @@ public class GoBackActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @OnClick(R.id.day)
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.day:
+                if (mDayNightMode == AppCompatDelegate.MODE_NIGHT_YES) {
+                    SharePreUtil.getIntance(GoBackActivity.this).setInt(AppCompatDelegate.MODE_NIGHT_NO);
+                    // 截图并将图片存储到hashMap中
+                    MemCacheHelper.getInstance().put(KEY_SCREEN_CAPTURE,
+                            UIUtils.captureContent(GoBackActivity.this));
+                    //做为假象截屏替换黑屏
+                    Intent starter = new Intent(GoBackActivity.this, CaptureActivity.class);
+                    starter.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    starter.putExtra("PARAM_MEM_CACHE_KEY", KEY_SCREEN_CAPTURE);
+                    startActivity(starter);
+//                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    Toast.makeText(GoBackActivity.this, "白天", Toast.LENGTH_SHORT).show();
+                    recreate();
+                } else {
+                    SharePreUtil.getIntance(GoBackActivity.this).setInt(AppCompatDelegate.MODE_NIGHT_YES);
+                    // 截图并将图片存储到hashMap中
+                    MemCacheHelper.getInstance().put(KEY_SCREEN_CAPTURE,
+                            UIUtils.captureContent(GoBackActivity.this));
+                    //做为假象截屏替换黑屏
+                    Intent starter = new Intent(GoBackActivity.this, CaptureActivity.class);
+                    starter.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    starter.putExtra("PARAM_MEM_CACHE_KEY", KEY_SCREEN_CAPTURE);
+                    startActivity(starter);
+//                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    Toast.makeText(GoBackActivity.this, "黑夜", Toast.LENGTH_SHORT).show();
+                    recreate();
+                }
+                break;
+        }
     }
 
     class BackAdapter extends BaseAdapter {

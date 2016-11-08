@@ -30,8 +30,12 @@ import com.umeng.message.PushAgent;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import hpu.dingyue.dao.User;
 import hpu.dingyue.dao.greendao.UserDao;
+import hpu.dingyue.modules.setting.SettingActivity;
 import hpu.dingyue.rxbus.RxBus;
 import hpu.dingyue.rxbus.RxBusActivity;
 import rx.functions.Action1;
@@ -50,15 +54,16 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private Button btn4;
     private CompositeSubscription subscription;
     private Button btn5;
-    private Button btn6;
-    private Button btn7;
     private ImageView imageView;
+    @BindView(R.id.btn6) Button btn6;
+    @BindView(R.id.btn7) Button btn7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PushAgent.getInstance(this).onAppStart();
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
         imageView = (ImageView) findViewById(R.id.image);
         imageView.setOnClickListener(this);
 
@@ -67,8 +72,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         btn3 = (Button) findViewById(R.id.btn3);
         btn4 = (Button) findViewById(R.id.btn4);
         btn5 = (Button) findViewById(R.id.btn5);
-        btn6 = (Button) findViewById(R.id.btn6);
-        btn7 = (Button) findViewById(R.id.btn7);
         getRxBus();
         initClick();
         subject();
@@ -96,6 +99,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         btn5.setOnClickListener(this);
     }
 
+    @OnClick({R.id.btn6, R.id.btn7})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -141,9 +145,12 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 break;
 
             case R.id.btn6:
-
+                Intent intent = new Intent(this, SettingActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btn7:
+                Intent intent1 = new Intent(this, DemoActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

@@ -47,4 +47,14 @@
     <style name="CommonButton.Primary">
 
     </style>
+
+    <!--开关样式-->
+    <style name="ss" parent="">
+
+    </style>
+    
+    <style name="DemoTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:listDivider">@color/black</item>
+    </style>
+
 </resources>
