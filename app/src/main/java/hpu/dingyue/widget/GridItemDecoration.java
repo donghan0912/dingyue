@@ -1,6 +1,7 @@
-package hpu.dingyue;
+package hpu.dingyue.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -9,66 +10,32 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
+ * GridView样式 item 分割线(四周没有分割线)
+ * 如果是listView 样式的，可以使用系统提供的DividerItemDecoration
  * Created by Administrator on 2016/11/8.
  */
 
-public class DemoDecoration extends RecyclerView.ItemDecoration {
+public class GridItemDecoration extends RecyclerView.ItemDecoration {
+    private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
     private Drawable mDivider;
 
-    public DemoDecoration(Context context, int resId) {
+    // 使用系统分割线，可以再主题中设置自定义分割线颜色
+    // <item name="android:listDivider">@drawable/divider</item>(注意：使用@color/无效)
+    public GridItemDecoration(Context context) {
+        final TypedArray a = context.obtainStyledAttributes(ATTRS);
+        mDivider = a.getDrawable(0);
+        a.recycle();
+    }
+
+    // 使用自定义分割线
+    public GridItemDecoration(Context context, int resId) {
         mDivider = ContextCompat.getDrawable(context, resId);
     }
 
     @Override
-    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        drawHorizontal(c, parent);
-        drawVertical(c, parent);
-    }
-
-    public void drawHorizontal(Canvas c, RecyclerView parent) {
-        int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            final View child = parent.getChildAt(i);
-            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
-                    .getLayoutParams();
-            final int left = child.getLeft() - params.leftMargin;
-            final int right = child.getRight() + params.rightMargin
-                    + mDivider.getIntrinsicWidth();
-            final int top = child.getBottom() + params.bottomMargin;
-            final int bottom = top + mDivider.getIntrinsicHeight();
-            mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(c);
-        }
-    }
-
-    public void drawVertical(Canvas c, RecyclerView parent) {
-        final int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            final View child = parent.getChildAt(i);
-            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child
-                    .getLayoutParams();
-            final int top = child.getTop() - params.topMargin;
-            final int bottom = child.getBottom() + params.bottomMargin;
-            final int left = child.getRight() + params.rightMargin;
-            final int right = left + mDivider.getIntrinsicWidth();
-            mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(c);
-        }
-    }
-
-    @Override
-    public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
-        outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
-    }
-
-
-
-   /* @Override
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-
-            drawVertical(c, parent);
-            drawHorizontal(c, parent);
-
+        drawVertical(c, parent);
+        drawHorizontal(c, parent);
     }
 
     public void drawVertical(Canvas c, RecyclerView parent) {
@@ -113,10 +80,7 @@ public class DemoDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-
-            outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
-
-    }*/
-
+        outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+    }
 
 }

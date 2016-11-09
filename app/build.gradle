@@ -77,6 +77,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'io.reactivex:rxjava:1.1.5'
     compile 'com.facebook.fresco:fresco:0.10.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0' // 图片加载库
     compile project(':PushSDK')
     // 数据库
     compile 'org.greenrobot:greendao:3.2.0'

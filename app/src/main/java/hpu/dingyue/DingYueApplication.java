@@ -2,7 +2,6 @@ package hpu.dingyue;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.umeng.message.IUmengRegisterCallback;

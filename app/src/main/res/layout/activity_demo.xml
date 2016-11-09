@@ -4,79 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:divider="@drawable/divider_translate"
-        android:showDividers="middle"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/first_recycler"
         android:paddingTop="30dp"
-        android:id="@+id/tv"
-        android:layout_width="98dp"
-        android:layout_height="match_parent"
         android:background="#8033cccc"
-        android:orientation="vertical">
-
-        <TextView
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="知识模块1"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-        <TextView
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="知识模块2"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-        <TextView
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="知识模块3"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-        <TextView
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="知识模块4"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-        <TextView
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="知识模块5"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-        <TextView
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="知识模块6"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-        <TextView
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="知识模块7"
-            android:textColor="#fff"
-            android:textSize="18sp" />
-
-    </LinearLayout>
+        android:layout_width="98dp"
+        android:layout_height="match_parent"/>
 
     <HorizontalScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv">
+        android:layout_toRightOf="@id/first_recycler">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -142,11 +81,10 @@
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/second_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
-                android:paddingBottom="10dp" />
+                android:background="@color/white"/>
         </LinearLayout>
 
     </HorizontalScrollView>
