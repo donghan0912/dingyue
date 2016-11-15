@@ -1,7 +1,9 @@
 package hpu.dingyue;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import hpu.dingyue.widget.GridItemDecoration;
+import hpu.dingyue.widget.TTT;
 
 /**
  * Created by Administrator on 2016/11/8.
@@ -27,18 +33,36 @@ public class DemoActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.second_recycler);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
         recyclerView.setLayoutManager(layoutManager);
-        DemoDecoration decoration = new DemoDecoration(this, R.drawable.divider);
-        recyclerView.addItemDecoration(decoration);
+//        DemoDecoration decoration = new DemoDecoration(this, R.drawable.divider);
+//        GridItemDecoration decoration = new GridItemDecoration(this, R.drawable.divider);
+//        recyclerView.addItemDecoration(decoration);
+        // 第一种方式
+//        TTT ttt = new TTT(this, 2);
+//        Drawable drawable1 = ContextCompat.getDrawable(this,  R.drawable.divider);
+//        ttt.setDrawable(drawable1);
+
+        // 第二种方式
+        TTT ttt = new TTT(this, 2, R.drawable.divider);
+        recyclerView.addItemDecoration(ttt);
+
+
         recyclerView.setAdapter(new DemoAdapter2());
 
         recyclerView1 = (RecyclerView) findViewById(R.id.first_recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView1.setLayoutManager(linearLayoutManager);
-        DemoDecoration decoration1 = new DemoDecoration(this, LinearLayoutManager.HORIZONTAL, R.drawable.divider_translate);
-        recyclerView1.addItemDecoration(decoration1);
+//        DemoDecoration decoration1 = new DemoDecoration(this, LinearLayoutManager.HORIZONTAL, R.drawable.divider_translate);
+//        DemoDecoration decoration1 = new DemoDecoration(this, R.drawable.divider_translate);
+//        recyclerView1.addItemDecoration(decoration1);
+
+//        TTT ttt1 = new TTT(this, LinearLayout.VERTICAL);
+//        Drawable drawable2 = ContextCompat.getDrawable(this, R.drawable.divider_translate);
+//        ttt1.setDrawable(drawable2);
+
+        TTT ttt1 = new TTT(this, TTT.VERTICAL, R.drawable.divider_translate);
+        recyclerView1.addItemDecoration(ttt1);
+
         recyclerView1.setAdapter(new DemoAdapter1());
-
-
         syncScrollEvent(recyclerView1, recyclerView);
 
     }
@@ -57,7 +81,7 @@ public class DemoActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 150;
+            return 300;
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
@@ -82,7 +106,7 @@ public class DemoActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 25;
+            return 50;
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {

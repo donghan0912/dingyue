@@ -46,6 +46,8 @@
         <activity android:name=".modules.setting.SettingActivity"/>
         <activity android:name=".DemoActivity"
             android:theme="@style/AppTheme"/>
+        <activity android:name=".Demo2Activity"
+            android:theme="@style/AppTheme"/>
 
         <meta-data
             android:name="UMENG_APPKEY"

@@ -150,6 +150,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 break;
             case R.id.btn7:
                 Intent intent1 = new Intent(this, DemoActivity.class);
+//                Intent intent1 = new Intent(this, Demo2Activity.class);
                 startActivity(intent1);
                 break;
         }
@@ -194,7 +195,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         subscription.clear();
     }
 
-    class MyDialog extends DialogFragment {
+    public class MyDialog extends DialogFragment {
 
         @Nullable
         @Override
