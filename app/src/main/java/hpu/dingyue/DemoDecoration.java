@@ -1,28 +1,54 @@
 package hpu.dingyue;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import static android.R.attr.orientation;
 
 /**
  * Created by Administrator on 2016/11/8.
  */
 
 public class DemoDecoration extends RecyclerView.ItemDecoration {
+    public static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
+    public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
+    public static final int GRID = 2;
+
     private Drawable mDivider;
+    private int mOrientation = -1;
 
     public DemoDecoration(Context context, int resId) {
         mDivider = ContextCompat.getDrawable(context, resId);
     }
 
+    public DemoDecoration(Context context, int orientation, int resId) {
+        mDivider = ContextCompat.getDrawable(context, resId);
+        setOrientation(orientation);
+    }
+
+    public void setOrientation(int orientation) {
+        if (orientation != HORIZONTAL_LIST && orientation != VERTICAL_LIST && orientation != GRID) {
+            throw new IllegalArgumentException("invalid orientation");
+        }
+        mOrientation = orientation;
+    }
+
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        if (mOrientation == VERTICAL_LIST) {
+            drawVertical(c, parent);
+        } else if(mOrientation == HORIZONTAL_LIST){
+            drawHorizontal(c, parent);
+        } else {
         drawHorizontal(c, parent);
-        drawVertical(c, parent);
+            drawVertical(c, parent);}
     }
 
     public void drawHorizontal(Canvas c, RecyclerView parent) {
@@ -58,7 +84,13 @@ public class DemoDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
-        outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+        if (mOrientation == VERTICAL_LIST) {
+            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
+        } else if(mOrientation == HORIZONTAL_LIST) {
+            outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
+        } else {
+            outRect.set(0, 0, mDivider.getIntrinsicWidth(), mDivider.getIntrinsicHeight());
+        }
     }
 
 

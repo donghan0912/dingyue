@@ -1,92 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#F7F7F7"
+              android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/first_recycler"
-        android:paddingTop="30dp"
-        android:background="#8033cccc"
-        android:layout_width="98dp"
-        android:layout_height="match_parent"/>
-
-    <HorizontalScrollView
-        android:id="@+id/scroll_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/first_recycler">
+        android:layout_height="70dp"
+        android:layout_marginBottom="10dp"
+        android:background="#fff"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="知识模块精细状态示意图"
+            android:textColor="#333333"
+            android:textSize="14sp"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:text="已达标"
+                android:textColor="#999999"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/standard"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:text="未达标"
+                android:textColor="#999999"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/unstandard"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:text="未启动"
+                android:textColor="#999999"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="20dp"
+                android:src="@drawable/unstarted"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/first_recycler"
+            android:layout_width="98dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:background="#4CA6FF"
+            android:paddingTop="30dp"/>
+
+        <HorizontalScrollView
+            android:id="@+id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/first_recycler">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#0f0e0e"
-                android:divider="@drawable/divider"
-                android:orientation="horizontal"
-                android:showDividers="middle">
-
-                <TextView
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="标准任务" />
-
-                <TextView
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="标准任务" />
-
-                <TextView
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="标准任务" />
-
-                <TextView
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="标准任务" />
-
-                <TextView
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="标准任务" />
-
-                <TextView
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="标准任务" />
-
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/second_recycler"
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"/>
-        </LinearLayout>
+                android:orientation="vertical">
 
-    </HorizontalScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="#0f0e0e"
+                    android:divider="@drawable/divider"
+                    android:orientation="horizontal"
+                    android:showDividers="middle">
 
-</RelativeLayout>
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="标准任务"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="标准任务"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="标准任务"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="标准任务"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="标准任务"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="标准任务"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/second_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+    </RelativeLayout>
+</LinearLayout>

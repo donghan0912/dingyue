@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MotionEvent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -17,26 +17,30 @@ import android.widget.TextView;
 
 public class DemoActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView1;
+    private RecyclerView recyclerView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.second_recycler);
+        recyclerView = (RecyclerView) findViewById(R.id.second_recycler);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
         recyclerView.setLayoutManager(layoutManager);
-//        DemoDecoration decoration = new DemoDecoration(this);
         DemoDecoration decoration = new DemoDecoration(this, R.drawable.divider);
         recyclerView.addItemDecoration(decoration);
         recyclerView.setAdapter(new DemoAdapter2());
 
-        RecyclerView recyclerView1 = (RecyclerView) findViewById(R.id.first_recycler);
+        recyclerView1 = (RecyclerView) findViewById(R.id.first_recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView1.setLayoutManager(linearLayoutManager);
-        DemoDecoration decoration1 = new DemoDecoration(this, R.drawable.divider_translate);
+        DemoDecoration decoration1 = new DemoDecoration(this, LinearLayoutManager.HORIZONTAL, R.drawable.divider_translate);
         recyclerView1.addItemDecoration(decoration1);
         recyclerView1.setAdapter(new DemoAdapter1());
 
+
         syncScrollEvent(recyclerView1, recyclerView);
+
     }
 
     class DemoAdapter2 extends RecyclerView.Adapter<DemoActivity.DemoAdapter2.MyViewHolder> {
@@ -53,16 +57,13 @@ public class DemoActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 78;
+            return 150;
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
-
             private TextView tv;
-
             public MyViewHolder(View itemView) {
                 super(itemView);
-//                tv = (TextView) itemView.findViewById(R.id.tv);
             }
         }
     }
@@ -81,24 +82,21 @@ public class DemoActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 13;
+            return 25;
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
-
             private TextView tv;
-
             public MyViewHolder(View itemView) {
                 super(itemView);
-//                tv = (TextView) itemView.findViewById(R.id.tv);
             }
         }
     }
 
-
+    private int i = 0;
     private void syncScrollEvent(final RecyclerView leftList, final RecyclerView rightList) {
 
-        leftList.setOnTouchListener(new View.OnTouchListener() {
+        /*leftList.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return rightList.getScrollState() != RecyclerView.SCROLL_STATE_IDLE;
@@ -109,8 +107,7 @@ public class DemoActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 return leftList.getScrollState() != RecyclerView.SCROLL_STATE_IDLE;
             }
-        });
-
+        });*/
 
         leftList.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -118,6 +115,7 @@ public class DemoActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
                     rightList.scrollBy(dx, dy);
+                    Log.e("左侧", dx + "/" + dy);
                 }
             }
         });
@@ -126,6 +124,7 @@ public class DemoActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
                     leftList.scrollBy(dx, dy);
+                    Log.e("右侧", dx + "/" + dy);
                 }
             }
         });
