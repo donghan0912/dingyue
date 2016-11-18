@@ -54,6 +54,7 @@ public class DemoActivity extends AppCompatActivity {
         public DemoActivity.DemoAdapter2.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             DemoActivity.DemoAdapter2.MyViewHolder holder = new DemoActivity.DemoAdapter2
                     .MyViewHolder(View.inflate(DemoActivity.this, R.layout.grid_view, null));
+
             return holder;
         }
 
@@ -79,6 +80,7 @@ public class DemoActivity extends AppCompatActivity {
         public DemoActivity.DemoAdapter1.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             DemoActivity.DemoAdapter1.MyViewHolder holder = new DemoActivity.DemoAdapter1
                     .MyViewHolder(View.inflate(DemoActivity.this, R.layout.item, null));
+
             return holder;
         }
 
@@ -120,6 +122,7 @@ public class DemoActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
                     rightList.scrollBy(dx, dy);
+                    Log.e("左侧滑动", dx + "/" + dy);
                 }
             }
         });
@@ -128,6 +131,7 @@ public class DemoActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
                     leftList.scrollBy(dx, dy);
+                    Log.e("右侧滑动", dx + "/" + dy);
                 }
             }
         });

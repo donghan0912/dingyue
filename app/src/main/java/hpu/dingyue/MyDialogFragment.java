@@ -42,7 +42,7 @@ public class MyDialogFragment extends DialogFragment implements View.OnClickList
 
         cancle.setOnClickListener(this);
         ok.setOnClickListener(this);
-        rxBus = ((LoginActivity) getActivity()).getRxBus();
+        rxBus = ((OtherActivity) getActivity()).getRxBus();
         return view;
     }
 
