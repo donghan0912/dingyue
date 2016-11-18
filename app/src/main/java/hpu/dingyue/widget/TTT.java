@@ -27,21 +27,9 @@ public class TTT extends RecyclerView.ItemDecoration {
     private static final int[] ATTRS = new int[]{ android.R.attr.listDivider };
 
     private Drawable mDivider;
-
-    /**
-     * Current orientation. Either {@link #HORIZONTAL} or {@link #VERTICAL}.
-     */
     private int mOrientation;
-
     private final Rect mBounds = new Rect();
 
-    /**
-     * Creates a divider {@link RecyclerView.ItemDecoration} that can be used with a
-     * {@link LinearLayoutManager}.
-     *
-     * @param context Current context, it will be used to access resources.
-     * @param orientation Divider orientation. Should be {@link #HORIZONTAL} or {@link #VERTICAL}.
-     */
     public TTT(Context context, int orientation) {
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
         mDivider = a.getDrawable(0);
@@ -54,12 +42,6 @@ public class TTT extends RecyclerView.ItemDecoration {
         setOrientation(orientation);
     }
 
-    /**
-     * Sets the orientation for this divider. This should be called if
-     * {@link RecyclerView.LayoutManager} changes orientation.
-     *
-     * @param orientation {@link #HORIZONTAL} or {@link #VERTICAL}
-     */
     public void setOrientation(int orientation) {
         if (orientation != HORIZONTAL && orientation != VERTICAL && orientation != GRID) {
             throw new IllegalArgumentException(
@@ -68,11 +50,6 @@ public class TTT extends RecyclerView.ItemDecoration {
         mOrientation = orientation;
     }
 
-    /**
-     * Sets the {@link Drawable} for this divider.
-     *
-     * @param drawable Drawable that should be used as a divider.
-     */
     public void setDrawable(@NonNull Drawable drawable) {
         if (drawable == null) {
             throw new IllegalArgumentException("Drawable cannot be null.");

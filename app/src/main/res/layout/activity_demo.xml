@@ -78,7 +78,7 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/first_recycler"
+            android:id="@+id/left_recycler"
             android:layout_width="98dp"
             android:layout_height="match_parent"
             android:background="#4CA6FF"
@@ -88,7 +88,7 @@
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/first_recycler">
+            android:layout_toRightOf="@id/left_recycler">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,7 +115,7 @@
                         android:layout_width="80dp"
                         android:layout_height="30dp"
                         android:gravity="center"
-                        android:text="标准任务"
+                        android:text="加强任务"
                         android:textColor="@color/white"
                         android:textSize="12sp"/>
 
@@ -123,7 +123,7 @@
                         android:layout_width="80dp"
                         android:layout_height="30dp"
                         android:gravity="center"
-                        android:text="标准任务"
+                        android:text="难点任务"
                         android:textColor="@color/white"
                         android:textSize="12sp"/>
 
@@ -131,7 +131,7 @@
                         android:layout_width="80dp"
                         android:layout_height="30dp"
                         android:gravity="center"
-                        android:text="标准任务"
+                        android:text="重点任务"
                         android:textColor="@color/white"
                         android:textSize="12sp"/>
 
@@ -139,7 +139,7 @@
                         android:layout_width="80dp"
                         android:layout_height="30dp"
                         android:gravity="center"
-                        android:text="标准任务"
+                        android:text="复习任务"
                         android:textColor="@color/white"
                         android:textSize="12sp"/>
 
@@ -147,14 +147,22 @@
                         android:layout_width="80dp"
                         android:layout_height="30dp"
                         android:gravity="center"
-                        android:text="标准任务"
+                        android:text="高难任务"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:text="突破任务"
                         android:textColor="@color/white"
                         android:textSize="12sp"/>
 
                 </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/second_recycler"
+                    android:id="@+id/right_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"/>
