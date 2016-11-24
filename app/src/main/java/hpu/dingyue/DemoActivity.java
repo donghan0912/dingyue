@@ -1,21 +1,14 @@
 package hpu.dingyue;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import hpu.dingyue.widget.GridItemDecoration;
-import hpu.dingyue.widget.TTT;
 
 /**
  * Created by Administrator on 2016/11/8.
@@ -69,6 +62,7 @@ public class DemoActivity extends AppCompatActivity {
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             private TextView tv;
+
             public MyViewHolder(View itemView) {
                 super(itemView);
             }
@@ -95,6 +89,7 @@ public class DemoActivity extends AppCompatActivity {
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             private TextView tv;
+
             public MyViewHolder(View itemView) {
                 super(itemView);
             }
@@ -102,27 +97,14 @@ public class DemoActivity extends AppCompatActivity {
     }
 
     private void syncScrollEvent(final RecyclerView leftList, final RecyclerView rightList) {
-
-        /*leftList.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return rightList.getScrollState() != RecyclerView.SCROLL_STATE_IDLE;
-            }
-        });
-        rightList.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return leftList.getScrollState() != RecyclerView.SCROLL_STATE_IDLE;
-            }
-        });*/
-
         leftList.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
+                    // this won't trigger OnScrollListener
+                    //  It is caused by the fact that RecyclerView does not know how LayoutManager will handle the scroll or if it will handle it at all
                     rightList.scrollBy(dx, dy);
-                    Log.e("左侧滑动", dx + "/" + dy);
                 }
             }
         });
@@ -131,7 +113,6 @@ public class DemoActivity extends AppCompatActivity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE) {
                     leftList.scrollBy(dx, dy);
-                    Log.e("右侧滑动", dx + "/" + dy);
                 }
             }
         });
