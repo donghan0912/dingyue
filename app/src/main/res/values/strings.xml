@@ -2,4 +2,5 @@
     <string name="app_name">dingyue</string>
     <item type="id" name="first_tag"/>
     <item type="id" name="second_tag"/>
+    <string name="test">测试</string>
 </resources>

@@ -70,4 +70,22 @@
         android:background="@drawable/icon_new_talk_text_selector"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <RadioButton
+        android:id="@+id/rb_1"
+        android:padding="30dp"
+        android:background="@drawable/selector_new_talk_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:text="按钮1"/>
+
+    <RadioButton
+        android:id="@+id/rb_2"
+        android:padding="30dp"
+        android:background="@drawable/selector_new_talk_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@null"
+        android:text="按钮2"/>
 </LinearLayout>

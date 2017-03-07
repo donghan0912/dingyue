@@ -13,6 +13,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -111,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.login:
                 startActivity(new Intent(this, OtherActivity.class));
+//                startActivity(new Intent(this, RadioActivity.class));
                 break;
         }
 

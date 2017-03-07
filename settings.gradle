@@ -1,1 +1,1 @@
-include ':app', ':PushSDK', ':greendao'
+include ':app', ':PushSDK', ':greendao', ':mylibrary'

@@ -33,8 +33,12 @@ import butterknife.OnClick;
 import hpu.dingyue.dao.User;
 import hpu.dingyue.dao.greendao.UserDao;
 import hpu.dingyue.modules.setting.SettingActivity;
+import hpu.dingyue.rxbus.RightFragment;
+import hpu.dingyue.rxbus.Rx;
 import hpu.dingyue.rxbus.RxBus;
+import hpu.dingyue.rxbus.RxBus2;
 import hpu.dingyue.rxbus.RxBusActivity;
+import rx.Subscriber;
 import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
@@ -72,17 +76,46 @@ public class OtherActivity extends FragmentActivity implements View.OnClickListe
     }
 
     private void subject() {
-        subscription = new CompositeSubscription();
-        subscription.add(rxBus.toObserverable().subscribe(new Action1<Object>() {
+//        subscription = new CompositeSubscription();
+//        subscription.add(rxBus.toObserverable().subscribe(new Action1<Object>() {
+//            @Override
+//            public void call(Object event) {
+//                if (event instanceof String) {
+//                    if (!TextUtils.isEmpty((String) event)) {
+//                        Toast.makeText(OtherActivity.this, (String) event, Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            }
+//        }));
+
+        Rx.getRxBusInstance().toObserverable(String.class).subscribe(new Subscriber<String>() {
             @Override
-            public void call(Object event) {
-                if (event instanceof String) {
-                    if (!TextUtils.isEmpty((String) event)) {
-                        Toast.makeText(OtherActivity.this, (String) event, Toast.LENGTH_SHORT).show();
-                    }
-                }
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Toast.makeText(OtherActivity.this, s, Toast.LENGTH_SHORT).show();
+                Log.e("=================",s);
+                btn1.setText(s);
+            }
+        });
+
+                subscription = new CompositeSubscription();
+        subscription.add(RxBus2.getInstance().toObserverable().subscribe(new Action1<Object>() {
+
+            @Override
+            public void call(Object o) {
+                Log.e("=================",(String)o);
             }
         }));
+
     }
 
     private void initClick() {

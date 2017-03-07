@@ -1,0 +1,2 @@
+rxbus: http://www.jianshu.com/p/3a3462535b4d
+rxjava: http://blog.csdn.net/column/details/rxjava.html?&page=1

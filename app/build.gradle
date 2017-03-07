@@ -67,7 +67,7 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile files('libs/jsoup-1.8.1.jar')
-//    compile 'io.reactivex:rxandroid:1.0.0'
+    //    compile 'io.reactivex:rxandroid:1.0.0'
     compile "io.reactivex:rxandroid:${libs.rxandroid}"
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'com.alibaba:fastjson:1.1.46.android'
@@ -77,15 +77,17 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'io.reactivex:rxjava:1.1.5'
     compile 'com.facebook.fresco:fresco:0.10.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0' // 图片加载库
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    // 图片加载库
     compile project(':PushSDK')
     // 数据库
     compile 'org.greenrobot:greendao:3.2.0'
     compile 'com.android.support:design:' + rootProject.ext.supportLibVersion
     compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibVersion
     // 以下两种都是配置在project.properties文件中，只不过引用方式不一样
-//    compile 'com.android.support:appcompat-v7:' + project.SUPPORT_LIBRARY_VERSION
-//    compile "com.android.support:appcompat-v7: ${SUPPORT_LIBRARY_VERSION}"// 注意双引号
+    //    compile 'com.android.support:appcompat-v7:' + project.SUPPORT_LIBRARY_VERSION
+    //    compile "com.android.support:appcompat-v7: ${SUPPORT_LIBRARY_VERSION}"// 注意双引号
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile files('libs/mylibrary.jar')
 }

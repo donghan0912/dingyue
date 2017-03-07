@@ -43,6 +43,8 @@ import hpu.dingyue.commonUtils.AnimationUtils;
 import hpu.dingyue.commonUtils.SharePreUtil;
 import hpu.dingyue.eventbus.LoginMessage;
 import hpu.dingyue.fragment.TabLayoutActivity;
+import hpu.dingyue.rxbus.RxBus;
+import hpu.dingyue.rxbus.RxBus2;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -105,6 +107,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 //        PushAgent agent = PushAgent.getInstance(this);
 //        agent.setAlias("", "");
+        RxBus rxBus = new RxBus();
+//        if (rxBus.hasObservers()) {
+            rxBus.send("ssss");
+//        }
+//        Rx.getRxBusInstance().post("sdfjlsfjlksdjflksdjf");
+        RxBus2.getInstance().post("yyyyyyyyyyyyyyyy");
     }
 
     @Override

@@ -31,3 +31,5 @@ git stash pop: 从Git栈中读取最近一次保存的内容
 git stash list: 显示Git栈内的所有备份，可以利用这个列表来决定从那个地方恢复。
 git stash clear: 清空Git栈
 
+# git reset --hard HASH 回退到某个提交分节点
+

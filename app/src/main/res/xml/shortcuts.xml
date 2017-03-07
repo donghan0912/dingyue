@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:shortcutId="settings"
+        android:enabled="true"
+        android:icon="@drawable/ic_android"
+        android:shortcutShortLabel="@string/test"
+        android:shortcutLongLabel="@string/test"
+        android:shortcutDisabledMessage="@string/test">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="hpu.dingyue"
+            android:targetClass="hpu.dingyue.MainActivity" />
+        <categories android:name="android.shortcut.conversation"/>
+    </shortcut>
+</shortcuts>
